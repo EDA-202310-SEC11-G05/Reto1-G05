@@ -48,8 +48,9 @@ def load_data(control, filename):
     """
     Carga los datos del reto
     """
-    # TODO: Realizar la carga de datos
-    pass
+    data= control["model"]
+    print(data)
+    return filename
 
 
 # Funciones de ordenamiento
