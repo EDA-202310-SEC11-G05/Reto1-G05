@@ -50,9 +50,9 @@ def load_data(control, filename):
     """
     data= control["model"]
     input_file = csv.DictReader(open(filename, encoding='utf-8'))
-    
-    return model.add_data(input_file,data)
-
+    for data_estructure in input_file:
+        carga= model.add_data(data,data_estructure)
+    return carga
 
 # Funciones de ordenamiento
 
