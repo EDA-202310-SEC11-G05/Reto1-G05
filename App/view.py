@@ -1,4 +1,4 @@
-"""
+﻿"""
  * Copyright 2020, Departamento de sistemas y Computación, Universidad
  * de Los Andes
  *
@@ -55,7 +55,7 @@ def print_menu():
     print("6- Ejecutar Requerimiento 5")
     print("7- Ejecutar Requerimiento 6")
     print("8- Ejecutar Requerimiento 7")
-    print("9- Seleccionar algoritmo de ordenamiento")
+    print("9- Ejecutar Requerimiento 8")
     print("10- Obtener dato dado un ID")
     print("11- Escoger estructuras de datos para carga de archivo")
     print("0- Salir")
@@ -114,7 +114,6 @@ def print_data(control, id):
     """
     data = controller.get_data(control, id)
     print("El dato con el ID", id, "es:", data)
-
 
 def print_req_1(control):
     """
@@ -179,6 +178,27 @@ def print_req_8(control):
     # TODO: Imprimir el resultado del requerimiento 8
     print(controller.req_8(control))
 
+def printSortResults(sort_books, sample=3):
+    # TODO completar función para imprimir resultados sort lab 4
+    size = lt.size(sort_books)
+    if size <= sample*2:
+        print("Los datos ordenados son:")
+        for book in lt.iterator(sort_books):
+            print("Año:" + book['año'] +' Rating: ' + book["Código actividad economica"])
+    else:
+        print("Los datos ordenados son:")
+        i = 1
+        while i <= sample:
+            book = lt.getElement(sort_books, i)
+            print("Año:" + book['año'] +' Rating: ' + book["Código actividad economica"])
+        i += 1
+        print("Los últimos datos ordenados son:")
+        i = size - sample + 1
+    while i <= size:
+        book = lt.getElement(sort_books, i)
+        print("Año:" + book['año'] +' Rating: ' + book["Código actividad economica"])
+        i += 1
+
 # Se crea el controlador asociado a la vista
 control = new_controller()
 
@@ -223,6 +243,13 @@ if __name__ == "__main__":
             elif int(inputs) == 10:
                 id = input("Ingrese un id: ")
                 print_data(control, id)
+                
+            elif int(inputs) == 11:
+                # TODO completar modificaciones para el laboratorio 4
+                size = input("Indique de 1 a 3: ")
+                result = controller.sort(control, int(size))
+                print("Los datos demoran, delta tiempo:", str(result))
+                printSortResults(control)
 
             elif int(inputs) == 0:
                 working = False
