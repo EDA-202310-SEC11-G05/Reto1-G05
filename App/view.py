@@ -57,6 +57,7 @@ def print_menu():
     print("8- Ejecutar Requerimiento 7")
     print("9- Ejecutar Requerimiento 8")
     print("10- Obtener dato dado un ID")
+    print("11- Escoger estructuras de datos para carga de archivo")
     print("0- Salir")
 
 

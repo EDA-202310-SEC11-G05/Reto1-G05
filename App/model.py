@@ -192,6 +192,27 @@ def req_8(data_structs):
     # TODO: Realizar el requerimiento 8
     pass
 
+#* Funciones de comparación
+
+def cmp_taxes_by_year_code(tax1, tax2):
+    """Devuelve verdadero (True) si el año de impuesto1 es menor que el de impuesto2,
+    en caso de que sean iguales tenga en cuenta el código de la actividad económica,
+    de lo contrario devuelva falso (False).
+
+    Args:
+        impuesto1: información del primer registro de impuestos que incluye el “Año” y el
+        “Código actividad económica”
+
+        impuesto2: información del segundo registro de impuestos que incluye el “Año” y el
+        “Código actividad económica”
+    """
+    if tax1["Año"] < tax2["Año"]:
+        return True
+    elif tax1["Año"] == tax2["Año"]:
+        if tax1["Código actividad económica"] < tax2["Código actividad económica"]:
+            return True
+    else:
+        return False
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 
