@@ -294,14 +294,12 @@ if __name__ == "__main__":
                     sort_data_result = run(tipo,orden)
                     printSortResults(sort_data_result[0])
                     print(sort_data_result[1])
-                    print(sort_data_result[2])
                 elif int(opcion) == 2:
                     tipo = 2
                     orden  = menu2()
                     sort_data_result = run(tipo,orden)
                     printSortResults(sort_data_result[0])
                     print(sort_data_result[1])
-                    print(sort_data_result[2])
 
             elif int(inputs) == 0:
                 working = False
