@@ -200,10 +200,10 @@ def cmp_taxes_by_year_code(tax1, tax2):
     de lo contrario devuelva falso (False).
 
     Args:
-        impuesto1: información del primer registro de impuestos que incluye el “Año” y el
+        tax1: información del primer registro de impuestos que incluye el “Año” y el
         “Código actividad económica”
 
-        impuesto2: información del segundo registro de impuestos que incluye el “Año” y el
+        tax2: información del segundo registro de impuestos que incluye el “Año” y el
         “Código actividad económica”
     """
     if tax1["Año"] < tax2["Año"]:
