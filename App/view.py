@@ -55,7 +55,7 @@ def print_menu():
     print("6- Ejecutar Requerimiento 5")
     print("7- Ejecutar Requerimiento 6")
     print("8- Ejecutar Requerimiento 7")
-    print("9- Ejecutar Requerimiento 8")
+    print("9- Seleccionar algoritmo de ordenamiento")
     print("10- Obtener dato dado un ID")
     print("11- Escoger estructuras de datos para carga de archivo")
     print("0- Salir")
@@ -109,6 +109,15 @@ def load_data(control):
     elif sample == 8:
 
         data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-large.csv")
+
+    print("Escoga un algoritmo para ordenar los datos:")
+    print("1- Shellsort")
+    print("2- Insertion sort")
+    print("3- Selection sort")
+
+    sorting_algorithm = int(input("Su elección: ")) 
+
+    controller.sort(control, sorting_algorithm)
 
     return data
 
@@ -183,7 +192,6 @@ def print_req_8(control):
     """
     # TODO: Imprimir el resultado del requerimiento 8
     print(controller.req_8(control))
-
 
 # Se crea el controlador asociado a la vista
 control = new_controller()
