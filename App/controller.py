@@ -65,8 +65,7 @@ def sort(control, sorting_algorithm):
     lista = model.sort(control["model"], sorting_algorithm)
     end_time = get_time()
     delta_t = delta_time(start_time, end_time)
-    tamano = lt.size(control['model']["data"])
-    return lista, delta_t, tamano
+    return lista, delta_t
 
 
 # Funciones de consulta sobre el catálogo
