@@ -218,13 +218,13 @@ def menu2():
         sort = "shell"
     return sort  
 
-def run(tipo, organizacion, tamaño):
+def run(tipo, organizacion):
     if tipo == 1:
         control = new_controller("ARRAY_LIST")
     elif tipo == 2:
         control = new_controller("SINGLE_LINKED")
 
-    load_data(control, tamaño)
+    load_data(control)
     if organizacion == "insertion":
         final = controller.sort(control, 1)
          
@@ -292,7 +292,7 @@ if __name__ == "__main__":
                     tipo = 1
                     orden  = menu2()
                     tamaño = load_data(control)
-                    sort_data_result = run(tipo,orden,tamaño)
+                    sort_data_result = run(tipo,orden)
                     printSortResults(sort_data_result[0])
                     print(sort_data_result[1])
                     print(sort_data_result[2])
@@ -300,7 +300,7 @@ if __name__ == "__main__":
                     tipo = 2
                     orden  = menu2()
                     tamaño = load_data(control)
-                    sort_data_result = run(tipo,orden,tamaño)
+                    sort_data_result = run(tipo,orden)
                     printSortResults(sort_data_result[0])
                     print(sort_data_result[1])
                     print(sort_data_result[2])
