@@ -1,4 +1,4 @@
-﻿"""
+"""
  * Copyright 2020, Departamento de sistemas y Computación, Universidad
  * de Los Andes
  *
@@ -105,21 +105,6 @@ def load_data(control):
     elif sample == 7:
 
         data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-small.csv")
-
-    elif sample == 8:
-
-        data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-large.csv")
-
-    print("Escoga un algoritmo para ordenar los datos:")
-    print("1- Shellsort")
-    print("2- Insertion sort")
-    print("3- Selection sort")
-
-    sorting_algorithm = int(input("Su elección: ")) 
-
-    controller.sort(control, sorting_algorithm)
-
-    print("Datos cargados y ordenados exitosamente")
     return data
 
 
