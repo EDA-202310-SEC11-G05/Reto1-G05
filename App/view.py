@@ -55,8 +55,9 @@ def print_menu():
     print("6- Ejecutar Requerimiento 5")
     print("7- Ejecutar Requerimiento 6")
     print("8- Ejecutar Requerimiento 7")
-    print("9- Ejecutar Requerimiento 8")
+    print("9- Seleccionar algoritmo de ordenamiento")
     print("10- Obtener dato dado un ID")
+    print("11- Escoger estructuras de datos para carga de archivo")
     print("0- Salir")
 
 
@@ -64,7 +65,61 @@ def load_data(control):
     """
     Carga los datos
     """
-    data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-small.csv")
+    
+    print("Por favor, escoga una opción para la muestra de datos:")
+    print("1- 5%")
+    print("2- 10%")
+    print("3- 20%")
+    print("4- 30%")
+    print("5- 50%")
+    print("6- 80%")
+    print("7- Archivo pequeño \"-small\"")
+    print("8- Archivo completo \"-large\"")
+
+    sample = int(input("Su elección: ")) 
+
+    if sample == 1:
+
+        data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-5pct.csv")
+
+    elif sample == 2:
+
+        data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-10pct.csv")
+
+    elif sample == 3:
+
+        data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-20pct.csv")
+
+    elif sample == 4:
+
+        data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-30pct.csv")
+
+    elif sample == 5:
+
+        data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-40pct.csv")
+
+    elif sample == 6:
+
+        data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-50pct.csv")
+
+    elif sample == 7:
+
+        data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-small.csv")
+
+    elif sample == 8:
+
+        data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-large.csv")
+
+    print("Escoga un algoritmo para ordenar los datos:")
+    print("1- Shellsort")
+    print("2- Insertion sort")
+    print("3- Selection sort")
+
+    sorting_algorithm = int(input("Su elección: ")) 
+
+    controller.sort(control, sorting_algorithm)
+
+    print("Datos cargados y ordenados exitosamente")
     return data
 
 
@@ -138,7 +193,6 @@ def print_req_8(control):
     """
     # TODO: Imprimir el resultado del requerimiento 8
     print(controller.req_8(control))
-
 
 # Se crea el controlador asociado a la vista
 control = new_controller()
