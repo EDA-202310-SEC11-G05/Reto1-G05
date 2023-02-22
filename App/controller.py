@@ -61,7 +61,7 @@ def sort(control, sorting_algorithm):
     Ordena los datos del modelo
     """
     start_time = get_time()
-    model.sort(control["model"], sorting_algorithm)
+    model.sort_model(control["model"], sorting_algorithm, model.cmp_taxes_by_year_code)
     end_time = get_time()
     delta_t = delta_time(start_time, end_time)
     return delta_t

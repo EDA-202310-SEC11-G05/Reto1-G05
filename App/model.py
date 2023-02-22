@@ -243,14 +243,14 @@ def sort_criteria(data_1, data_2):
     return data_1["id"] > data_2["id"]
 
 
-def sort(data_structs, sorting_algorithm):
+def sort_model(data_structs, sorting_algorithm, cmpfunc):
     """
     Función encargada de ordenar la lista con los datos
     """
 
     if sorting_algorithm == 1:
-        sa.sort(data_structs["data"], sort_criteria)
+        sa.sort(data_structs["data"], cmpfunc)
     elif sorting_algorithm == 2:
-        ins.sort(data_structs["data"], sort_criteria)
+        ins.sort(data_structs["data"], cmpfunc)
     elif sorting_algorithm == 3:
-        se.sort(data_structs["data"], sort_criteria)
+        se.sort(data_structs["data"], cmpfunc)

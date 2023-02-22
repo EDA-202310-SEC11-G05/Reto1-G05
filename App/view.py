@@ -119,6 +119,7 @@ def load_data(control):
 
     controller.sort(control, sorting_algorithm)
 
+    print("Datos cargados y ordenados exitosamente")
     return data
 
 
