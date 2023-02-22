@@ -37,11 +37,11 @@ operación solicitada
 """
 
 
-def new_controller():
+def new_controller(type):
     """
         Se crea una instancia del controlador
     """
-    control = controller.new_controller()
+    control = controller.new_controller(type)
     return control
 
 
@@ -179,28 +179,66 @@ def print_req_8(control):
     print(controller.req_8(control))
 
 def printSortResults(sort_books, sample=3):
-    # TODO completar función para imprimir resultados sort lab 4
     size = lt.size(sort_books)
-    if size <= sample*2:
-        print("Los datos ordenados son:")
-        for book in lt.iterator(sort_books):
-            print("Año:" + book['año'] +' Rating: ' + book["Código actividad economica"])
+    lista_1 =lt.iterator(sort_books)
+
+    
+    if size<= sample*2:
+        print('Los',size,'primeros impuestos son:')
+        for impuesto in lista_1:
+            print(impuesto)
+
     else:
-        print("Los datos ordenados son:")
-        i = 1
-        while i <= sample:
-            book = lt.getElement(sort_books, i)
-            print("Año:" + book['año'] +' Rating: ' + book["Código actividad economica"])
-        i += 1
-        print("Los últimos datos ordenados son:")
-        i = size - sample + 1
-    while i <= size:
-        book = lt.getElement(sort_books, i)
-        print("Año:" + book['año'] +' Rating: ' + book["Código actividad economica"])
-        i += 1
+        print('Los',sample, 'primeros impuestos son:')
+        i=1
+        while i <=sample:
+            impuesto = lt.getElement(sort_books, i)
+            print(impuesto)
+            i+=1
+        print('los',sample, 'últimos libros ordenados son:')
+        i= size- sample +1
+        while i <=size:
+            impuesto = lt.getElement(sort_books, i)
+            print(impuesto)
+            i+=1 
+            
+def menu2():
+    print("Ahora que tipo de ordenamiento deseas ")
+    print("1- insertion sort")
+    print("2- selection sort")
+    print("3- shell sort")
+    ordenamiento = input('Seleccione una opción para continuar\n')
+    if int(ordenamiento) == 1:
+        sort = "insertion"
+        return sort
+    elif int(ordenamiento) == 2:
+        sort = "selection"
+        return sort
+    elif int(ordenamiento) == 3:
+        sort = "shell"
+    return sort  
+
+def run(tipo, organizacion, tamaño):
+    if tipo == 1:
+        control = new_controller("ARRAY_LIST")
+    elif tipo == 2:
+        control = new_controller("SINGLE_LINKED")
+
+    load_data(control, tamaño)
+    if organizacion == "insertion":
+        final = controller.sort(control, 1)
+         
+ 
+    elif organizacion == "selection":
+        final = controller.sort(control, 2)
+
+    elif organizacion == "shell":
+        final = controller.sort(control, 3)
+
+    return final
 
 # Se crea el controlador asociado a la vista
-control = new_controller()
+control = new_controller("ARRAY_LIST")
 
 # main del reto
 if __name__ == "__main__":
@@ -245,11 +283,27 @@ if __name__ == "__main__":
                 print_data(control, id)
                 
             elif int(inputs) == 11:
-                # TODO completar modificaciones para el laboratorio 4
-                size = input("Indique de 1 a 3: ")
-                result = controller.sort(control, int(size))
-                print("Los datos demoran, delta tiempo:", str(result))
-                printSortResults(control)
+                print("Ahora que tipo de lista deseas ")
+                print("1- ARRAY_LIST")
+                print("2- SINGLE_LINKED")
+                opcion = input('Seleccione una opción para continuar\n')
+                
+                if int(opcion) == 1:
+                    tipo = 1
+                    orden  = menu2()
+                    tamaño = load_data(control)
+                    sort_data_result = run(tipo,orden,tamaño)
+                    printSortResults(sort_data_result[0])
+                    print(sort_data_result[1])
+                    print(sort_data_result[2])
+                elif int(opcion) == 2:
+                    tipo = 2
+                    orden  = menu2()
+                    tamaño = load_data(control)
+                    sort_data_result = run(tipo,orden,tamaño)
+                    printSortResults(sort_data_result[0])
+                    print(sort_data_result[1])
+                    print(sort_data_result[2])
 
             elif int(inputs) == 0:
                 working = False

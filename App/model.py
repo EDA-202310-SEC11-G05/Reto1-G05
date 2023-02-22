@@ -44,7 +44,7 @@ dos listas, una para los videos, otra para las categorias de los mismos.
 # Construccion de modelos
 
 
-def new_data_structs():
+def new_data_structs(type):
     """
     Inicializa las estructuras de datos del modelo. Las crea de
     manera vacía para posteriormente almacenar la información.
@@ -53,7 +53,7 @@ def new_data_structs():
         "data": None,
     }
 
-    data_structs["data"] = lt.newList(datastructure="ARRAY_LIST",
+    data_structs["data"] = lt.newList(datastructure=type,
                                      cmpfunction=compare)
 
     return data_structs
@@ -230,27 +230,37 @@ def compare(data_1, data_2):
 # Funciones de ordenamiento
 
 
-def sort_criteria(data_1, data_2):
+def sort_criteria(impuesto_1, impuesto_2):
     """sortCriteria criterio de ordenamiento para las funciones de ordenamiento
-
     Args:
         data1 (_type_): _description_
         data2 (_type_): _description_
-
     Returns:
         _type_: _description_
     """
-    return data_1["id"] > data_2["id"]
+    
+    if impuesto_1['Año']!= impuesto_2['Año']:
+        cod_1 = impuesto_1['Año'].split()[0]
+        cod_2 = impuesto_2['Año'].split()[0]
+        return(float(impuesto_1['Año'])> float(impuesto_2['Año']))
+    
+    else:
+        cod_1 = impuesto_1['Código actividad económica'].split()[0].split('/')[0]
+        cod_2 = impuesto_2['Código actividad económica'].split()[0].split('/')[0]
+        return(float(cod_1)>float(cod_2))
 
 
-def sort_model(data_structs, sorting_algorithm, cmpfunc):
-    """
-    Función encargada de ordenar la lista con los datos
-    """
+def sort(data_structs, tipo):
+    if tipo == 1:
+        sub_list = lt.subList(data_structs['data'],1,data_size(data_structs))
+        lista =ins.sort(sub_list, sort_criteria)
 
-    if sorting_algorithm == 1:
-        sa.sort(data_structs["data"], cmpfunc)
-    elif sorting_algorithm == 2:
-        ins.sort(data_structs["data"], cmpfunc)
-    elif sorting_algorithm == 3:
-        se.sort(data_structs["data"], cmpfunc)
+    elif tipo == 2:
+
+        sub_list = lt.subList(data_structs['data'],1,data_size(data_structs))
+        lista =se.sort(sub_list, sort_criteria)
+    elif tipo == 3:
+        sub_list = lt.subList(data_structs['data'],1,data_size(data_structs))
+        lista =sa.sort(sub_list, sort_criteria)
+    
+    return lista

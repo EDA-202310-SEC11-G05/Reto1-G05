@@ -24,6 +24,7 @@ import config as cf
 import model
 import time
 import csv
+from DISClib.ADT import list as lt
 
 
 """
@@ -31,14 +32,14 @@ El controlador se encarga de mediar entre la vista y el modelo.
 """
 
 
-def new_controller():
+def new_controller(type):
     """
     Crea una instancia del modelo
     """
     control = {
         "model": None
     }
-    control["model"] = model.new_data_structs()
+    control["model"] = model.new_data_structs(type)
     return control
 
 
@@ -51,8 +52,8 @@ def load_data(control, filename):
     data= control["model"]
     input_file = csv.DictReader(open(filename, encoding='utf-8'))
     for data_estructure in input_file:
-        carga= model.add_data(data,data_estructure)
-    return carga
+        model.add_data(data,data_estructure)
+    return data
 
 # Funciones de ordenamiento
 
@@ -61,10 +62,11 @@ def sort(control, sorting_algorithm):
     Ordena los datos del modelo
     """
     start_time = get_time()
-    model.sort_model(control["model"], sorting_algorithm, model.cmp_taxes_by_year_code)
+    lista = model.sort(control["model"], sorting_algorithm)
     end_time = get_time()
     delta_t = delta_time(start_time, end_time)
-    return delta_t
+    tamano = lt.size(control['model']["data"])
+    return lista, delta_t, tamano
 
 
 # Funciones de consulta sobre el catálogo
