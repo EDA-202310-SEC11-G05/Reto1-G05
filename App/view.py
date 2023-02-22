@@ -291,7 +291,6 @@ if __name__ == "__main__":
                 if int(opcion) == 1:
                     tipo = 1
                     orden  = menu2()
-                    tamaño = load_data(control)
                     sort_data_result = run(tipo,orden)
                     printSortResults(sort_data_result[0])
                     print(sort_data_result[1])
@@ -299,7 +298,6 @@ if __name__ == "__main__":
                 elif int(opcion) == 2:
                     tipo = 2
                     orden  = menu2()
-                    tamaño = load_data(control)
                     sort_data_result = run(tipo,orden)
                     printSortResults(sort_data_result[0])
                     print(sort_data_result[1])
