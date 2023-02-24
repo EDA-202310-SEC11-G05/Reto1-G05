@@ -70,7 +70,7 @@ To use this template, you need to follow the steps below:
 * Unzip and load the dataset into the application at [Data](./Data) folder.
 * Import the necessary modules from [DISClib](./DISClib) into the MVC scripts at [App](./App) folder.
 * Implement the missing functions according to the project needs in the MVC scripts at [App](./App) folder.
-* Evaluate the implementation of the MVC scripts, record your tests and analysis in the documents at [Docs](./Docs) folder (The report **MUST BE** in PDF format).
+* Evaluate the implementation of the MVC scripts, record your tests and analysis in the documents at [Docs](./Docs) folder (The report **MUST BE** in PDF format). 
 
 [Back to top](#challenge-template)
 
