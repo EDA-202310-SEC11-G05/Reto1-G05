@@ -96,15 +96,19 @@ def load_data(control):
 
     elif sample == 5:
 
-        data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-40pct.csv")
+        data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-50pct.csv")
 
     elif sample == 6:
 
-        data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-50pct.csv")
+        data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-80pct.csv")
 
     elif sample == 7:
 
         data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-small.csv")
+
+    elif sample == 8:
+
+        data = controller.load_data(control, cf.data_dir+"\DIAN\Salida_agregados_renta_juridicos_AG-large.csv")
     return data
 
 
@@ -204,9 +208,11 @@ def printSortResults(sort_books, sample=3):
             
 def menu2():
     print("Ahora que tipo de ordenamiento deseas ")
-    print("1- insertion sort")
-    print("2- selection sort")
-    print("3- shell sort")
+    print("1- Insertion sort")
+    print("2- Selection sort")
+    print("3- Shell sort")
+    print("4- Merge sort")
+    print("5- Quicksort")
     ordenamiento = input('Seleccione una opción para continuar\n')
     if int(ordenamiento) == 1:
         sort = "insertion"
@@ -216,6 +222,10 @@ def menu2():
         return sort
     elif int(ordenamiento) == 3:
         sort = "shell"
+    elif int(ordenamiento) == 4:
+        sort = "merge"
+    elif int(ordenamiento) == 5:
+        sort = "quicksort"
     return sort  
 
 def run(tipo, organizacion):
@@ -234,6 +244,12 @@ def run(tipo, organizacion):
 
     elif organizacion == "shell":
         final = controller.sort(control, 3)
+    
+    elif organizacion == "merge":
+        final = controller.sort(control, 4)
+
+    elif organizacion == "quicksort":
+        final = controller.sort(control, 5)
 
     return final
 
