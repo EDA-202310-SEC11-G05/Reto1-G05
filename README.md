@@ -39,7 +39,7 @@ The students edit this section to add their names, Uniandes emails, and specify 
 [Back to top](#challenge-template)
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## About The Project 
 
 This is a template repository to use in the project implementation for the data structures and algorithms (#EDA) course at Uniandes.
 
