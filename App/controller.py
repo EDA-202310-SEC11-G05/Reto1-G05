@@ -57,12 +57,12 @@ def load_data(control, filename):
 
 # Funciones de ordenamiento
 
-def sort(control, sorting_algorithm):
+def sort(control):
     """
     Ordena los datos del modelo
     """
     start_time = get_time()
-    lista = model.sort(control["model"], sorting_algorithm)
+    lista = model.sort(control["model"])
     end_time = get_time()
     delta_t = delta_time(start_time, end_time)
     return lista, delta_t

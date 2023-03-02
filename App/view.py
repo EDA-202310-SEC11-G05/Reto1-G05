@@ -207,12 +207,6 @@ def printSortResults(sort_books, sample=3):
             print(impuesto)
             i+=1  
 
-def run(tipo):
-    control = new_controller(tipo)
-    load_data(control)
-    final = controller.sort(control)
-    return final
-
 # Se crea el controlador asociado a la vista
 control = new_controller("ARRAY_LIST")
 
@@ -230,8 +224,9 @@ if __name__ == "__main__":
             if int(inputs) == 1:
                 print("Cargando información de los archivos ....\n")
                 data = load_data(control)
-                sort_data_result = run("ARRAY_LIST")
-                printSortResults(sort_data_result[0])
+                sort_data_result = controller.sort(control)
+                for_tables= printSortResults(sort_data_result[0])
+                print(tabulate(for_tables))
                 print("El tiempo en milisegundo transcurridos fue de: ",str(sort_data_result[1]))
             
             elif int(inputs) == 2:
