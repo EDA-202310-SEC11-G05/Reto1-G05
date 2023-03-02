@@ -80,7 +80,8 @@ def new_data(Anio,Codigo_actividad_económica,Nombre_actividad_economica,Codigo_
     data= {"Año":Anio,"Código actividad económica":Codigo_actividad_económica,"Nombre actividad económica":Nombre_actividad_economica,
            "Código sector económico":Codigo_sector_economico,"Nombre sector económico":Nombre_sector_economico,
            "Código subsector económico":Codigo_subsector_economico,"Nombre subsector económico":Nombre_subsector_economico,
-           "Total costos y gastos":Total_costos_y_gastos,"Total saldo a pagar":Total_saldo_a_pagar,"Total saldo a favor":Total_saldo_a_favor}
+           "Total ingresos netos":Total_ingresos_netos,"Total costos y gastos":Total_costos_y_gastos,
+           "Total saldo a pagar":Total_saldo_a_pagar,"Total saldo a favor":Total_saldo_a_favor}
     return data
 
 
