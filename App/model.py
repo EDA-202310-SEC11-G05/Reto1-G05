@@ -110,8 +110,11 @@ def req_1(data_structs):
     Función que soluciona el requerimiento 1
     """
     # TODO: Realizar el requerimiento 1
-    pass
+    lista= data_structs["data"]["elements"]
+    
+    return lista
 
+print(req_1)
 
 def req_2(data_structs):
     """
