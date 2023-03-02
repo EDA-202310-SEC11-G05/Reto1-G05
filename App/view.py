@@ -27,7 +27,8 @@ from DISClib.ADT import list as lt
 from DISClib.ADT import stack as st
 from DISClib.ADT import queue as qu
 assert cf
-#from tabulate import tabulate
+from tabulate import tabulate
+import traceback
 
 """
 La vista se encarga de la interacción con el usuario
@@ -315,7 +316,7 @@ if __name__ == "__main__":
                     orden  = menu2()
                     sort_data_result = run(tipo,orden)
                     printSortResults(sort_data_result[0])
-                    print(sort_data_result[1])
+                    print("El tiempo en milisegundo transcurridos fue de: ",str(sort_data_result[1]))
 
             elif int(inputs) == 0:
                 working = False
@@ -325,4 +326,5 @@ if __name__ == "__main__":
                 print("Opción errónea, vuelva a elegir.\n")
         except ValueError:
             print("Ingrese una opción válida.\n")
+            traceback.print_exc()
     sys.exit(0)

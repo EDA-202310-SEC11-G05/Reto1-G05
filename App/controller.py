@@ -39,7 +39,7 @@ def new_controller(type):
     control = {
         "model": None
     }
-    control["model"] = model.new_data_structs(type)
+    control["model"] = model.new_data_structs("ARRAY_LIST")
     return control
 
 
@@ -83,6 +83,7 @@ def req_1(control):
     Retorna el resultado del requerimiento 1
     """
     # TODO: Modificar el requerimiento 1
+    
     req_1 = model.req_1(control["model"])
     return req_1
 
