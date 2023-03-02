@@ -205,53 +205,12 @@ def printSortResults(sort_books, sample=3):
         while i <=size:
             impuesto = lt.getElement(sort_books, i)
             print(impuesto)
-            i+=1 
-            
-def menu2():
-    print("Ahora que tipo de ordenamiento deseas ")
-    print("1- Insertion sort")
-    print("2- Selection sort")
-    print("3- Shell sort")
-    print("4- Merge sort")
-    print("5- Quicksort")
-    ordenamiento = input('Seleccione una opción para continuar\n')
-    if int(ordenamiento) == 1:
-        sort = "insertion"
-        return sort
-    elif int(ordenamiento) == 2:
-        sort = "selection"
-        return sort
-    elif int(ordenamiento) == 3:
-        sort = "shell"
-    elif int(ordenamiento) == 4:
-        sort = "merge"
-    elif int(ordenamiento) == 5:
-        sort = "quicksort"
-    return sort  
+            i+=1  
 
-def run(tipo, organizacion):
-    if tipo == 1:
-        control = new_controller("ARRAY_LIST")
-    elif tipo == 2:
-        control = new_controller("SINGLE_LINKED")
-
+def run(tipo):
+    control = new_controller(tipo)
     load_data(control)
-    if organizacion == "insertion":
-        final = controller.sort(control, 1)
-         
- 
-    elif organizacion == "selection":
-        final = controller.sort(control, 2)
-
-    elif organizacion == "shell":
-        final = controller.sort(control, 3)
-    
-    elif organizacion == "merge":
-        final = controller.sort(control, 4)
-
-    elif organizacion == "quicksort":
-        final = controller.sort(control, 5)
-
+    final = controller.sort(control)
     return final
 
 # Se crea el controlador asociado a la vista
@@ -271,6 +230,10 @@ if __name__ == "__main__":
             if int(inputs) == 1:
                 print("Cargando información de los archivos ....\n")
                 data = load_data(control)
+                sort_data_result = run("ARRAY_LIST")
+                printSortResults(sort_data_result[0])
+                print("El tiempo en milisegundo transcurridos fue de: ",str(sort_data_result[1]))
+            
             elif int(inputs) == 2:
                 print_req_1(control)
 
@@ -298,25 +261,6 @@ if __name__ == "__main__":
             elif int(inputs) == 10:
                 id = input("Ingrese un id: ")
                 print_data(control, id)
-                
-            elif int(inputs) == 11:
-                print("Ahora que tipo de lista deseas ")
-                print("1- ARRAY_LIST")
-                print("2- SINGLE_LINKED")
-                opcion = input('Seleccione una opción para continuar\n')
-                
-                if int(opcion) == 1:
-                    tipo = 1
-                    orden  = menu2()
-                    sort_data_result = run(tipo,orden)
-                    printSortResults(sort_data_result[0])
-                    print(sort_data_result[1])
-                elif int(opcion) == 2:
-                    tipo = 2
-                    orden  = menu2()
-                    sort_data_result = run(tipo,orden)
-                    printSortResults(sort_data_result[0])
-                    print("El tiempo en milisegundo transcurridos fue de: ",str(sort_data_result[1]))
 
             elif int(inputs) == 0:
                 working = False
