@@ -192,7 +192,7 @@ def printSortResults(sort_books, sample=3):
         print('Los',size,'primeros impuestos son:')
         for impuesto in lista_1:
             lista.append(impuesto)
-        print(tabulate(lista, tablefmt='grid'))
+        print(tabulate(lista, tablefmt='grid', stralign='center'))
 
     else:
         print('Los',sample, 'primeros impuestos son:')
@@ -202,7 +202,7 @@ def printSortResults(sort_books, sample=3):
             impuesto = lt.getElement(sort_books, i)
             lista1.append(impuesto)
             i+=1
-        print(tabulate(lista1, tablefmt='grid'))
+        print(tabulate(lista1, tablefmt='grid', stralign='center'))
         print('los',sample, 'últimos libros ordenados son:')
         i= size- sample +1
         lista2= []
@@ -210,7 +210,7 @@ def printSortResults(sort_books, sample=3):
             impuesto = lt.getElement(sort_books, i)
             lista2.append(impuesto)
             i+=1
-        print(tabulate(lista2, tablefmt='grid'))
+        print(tabulate(lista2, tablefmt='grid', stralign='center'))
 
 # Se crea el controlador asociado a la vista
 control = new_controller("ARRAY_LIST")
