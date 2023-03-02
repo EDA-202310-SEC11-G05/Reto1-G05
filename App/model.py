@@ -250,25 +250,7 @@ def sort_criteria(impuesto_1, impuesto_2):
         return(float(cod_1)>float(cod_2))
 
 
-def sort(data_structs, tipo):
-    if tipo == 1:
-        sub_list = lt.subList(data_structs['data'],1,data_size(data_structs))
-        lista =ins.sort(sub_list, sort_criteria)
-
-    elif tipo == 2:
-
-        sub_list = lt.subList(data_structs['data'],1,data_size(data_structs))
-        lista =se.sort(sub_list, sort_criteria)
-    elif tipo == 3:
-        sub_list = lt.subList(data_structs['data'],1,data_size(data_structs))
-        lista =sa.sort(sub_list, sort_criteria)
-
-    elif tipo == 4:
-        sub_list = lt.subList(data_structs['data'],1,data_size(data_structs))
-        lista =quk.sort(sub_list, sort_criteria)
-    elif tipo == 5:
-        sub_list = lt.subList(data_structs['data'],1,data_size(data_structs))
-        lista =merg.sort(sub_list, sort_criteria)
-        
-    
+def sort(data_structs):
+    sub_list = lt.subList(data_structs['data'],1,data_size(data_structs))
+    lista =merg.sort(sub_list, sort_criteria)
     return lista
