@@ -186,26 +186,31 @@ def print_req_8(control):
 def printSortResults(sort_books, sample=3):
     size = lt.size(sort_books)
     lista_1 =lt.iterator(sort_books)
-
     
     if size<= sample*2:
+        lista= []
         print('Los',size,'primeros impuestos son:')
         for impuesto in lista_1:
-            print(impuesto)
+            lista.append(impuesto)
+        print(tabulate(lista, tablefmt='grid'))
 
     else:
         print('Los',sample, 'primeros impuestos son:')
         i=1
+        lista1= []
         while i <=sample:
             impuesto = lt.getElement(sort_books, i)
-            print(impuesto)
+            lista1.append(impuesto)
             i+=1
+        print(tabulate(lista1, tablefmt='grid'))
         print('los',sample, 'últimos libros ordenados son:')
         i= size- sample +1
+        lista2= []
         while i <=size:
             impuesto = lt.getElement(sort_books, i)
-            print(impuesto)
-            i+=1  
+            lista2.append(impuesto)
+            i+=1
+        print(tabulate(lista2, tablefmt='grid'))
 
 # Se crea el controlador asociado a la vista
 control = new_controller("ARRAY_LIST")
@@ -225,8 +230,8 @@ if __name__ == "__main__":
                 print("Cargando información de los archivos ....\n")
                 data = load_data(control)
                 sort_data_result = controller.sort(control)
-                for_tables= printSortResults(sort_data_result[0])
-                print(tabulate(for_tables))
+                printSortResults(sort_data_result[0])
+                "[]"
                 print("El tiempo en milisegundo transcurridos fue de: ",str(sort_data_result[1]))
             
             elif int(inputs) == 2:
