@@ -71,7 +71,7 @@ def add_data(data_structs, data):
                  data["Inversiones e instrumentos"],data["Cuentas y otros por cobrar"],data["Inventarios"],data["Propiedades"],
                  data["Otros activos"],data["Total patrimonio bruto"],data["Pasivos"],data["Total patrimonio líquido"],
                  data["Ingresos ordinarios"],data["Ingresos financieros"],data["Otros ingresos"],data["Total ingresos brutos"],
-                 data["Devoluciones , rebajas"],data["Ingresos no renta"],data["Total ingresos netos"],data["Costos"],
+                 data["Devoluciones, rebajas"],data["Ingresos no renta"],data["Total ingresos netos"],data["Costos"],
                  data["Gastos administración"],data["Gastos distribución"],data["Gastos financieros"],data["Otros gastos"],
                  data["Total costos y gastos"],data["Renta líquida ordinaria"],data["Pérdida líquida"],data["Compensaciones"],
                  data["Renta líquida"],data["Renta presuntiva"],data["Renta exenta"],data["Rentas gravables"],data["Renta líquida gravable"],
@@ -95,7 +95,7 @@ def new_data(Anio,Codigo_actividad_económica,Nombre_actividad_economica,Codigo_
            "Cuentas y otros por cobrar":Cuentas_y_otros_por_cobrar,"Inventarios":Inventarios,"Propiedades":Propiedades,"Otros activos":Otros_activos,
            "Total patrimonio bruto":Total_patrimonio_bruto,"Pasivos":Pasivos,"Total patrimonio líquido":Total_patrimonio_liquido,
            "Ingresos ordinarios":Ingresos_ordinarios,"Ingresos financieros":Ingresos_financieros,"Otros ingresos":Otros_ingresos,
-           "Total ingresos brutos":Total_ingresos_brutos,"Devoluciones , rebajas":Devoluciones_rebajas,"Ingresos no renta":Ingresos_no_renta,
+           "Total ingresos brutos":Total_ingresos_brutos,"Devoluciones, rebajas":Devoluciones_rebajas,"Ingresos no renta":Ingresos_no_renta,
            "Total ingresos netos":Total_ingresos_netos,"Costos":Costos,"Gastos administración":Gastos_administracion,"Gastos distribución":Gastos_distribucion,
            "Gastos financieros":Gastos_financieros,"Otros gastos":Otros_gastos,"Total costos y gastos":Total_costos_y_gastos,
            "Renta líquida ordinaria":Renta_liquida_ordinaria,"Pérdida líquida":Perdida_liquida,"Compensaciones":Compensaciones,"Renta líquida":Renta_liquida,
@@ -136,10 +136,8 @@ def req_1(data_structs):
     """
     # TODO: Realizar el requerimiento 1
     lista= sort(data_structs)
-    
-    print(lista)
 
-print(req_1)
+    print(lista)
 
 def req_2(data_structs):
     """
