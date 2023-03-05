@@ -233,7 +233,7 @@ if __name__ == "__main__":
                 data = load_data(control)
                 sort_data_result = controller.sort(control)
                 ordenado =printSortResults(sort_data_result[0])
-                print(tabulate(ordenado, headers="keys", stralign='center', tablefmt='grid', maxheadercolwidths=10))
+                print(tabulate(ordenado, headers="keys", stralign='center', tablefmt='fancy_grid', maxheadercolwidths=10))
                 print("El tiempo en milisegundo transcurridos fue de: ",str(sort_data_result[1]))
             
             elif int(inputs) == 2:
