@@ -81,7 +81,6 @@ def add_data(data_structs, data):
                  data["Autorretenciones"],data["Otras retenciones"],data["Total retenciones"],data["Anticipo renta siguiente año"],
                  data["Saldo a pagar por impuesto"],data["Sanciones"],data["Total saldo a pagar"],data["Total saldo a favor"])
     lt.addLast(data_structs["data"], d)
-    print(data_structs)
     return data_structs
 
 # Funciones para creacion de datos

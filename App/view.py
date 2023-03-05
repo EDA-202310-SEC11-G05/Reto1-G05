@@ -186,31 +186,33 @@ def print_req_8(control):
 def printSortResults(sort_books, sample=3):
     size = lt.size(sort_books)
     lista_1 =lt.iterator(sort_books)
-    
-    if size<= sample*2:
-        lista= []
-        print('Los',size,'primeros impuestos son:')
-        for impuesto in lista_1:
-            lista.append(impuesto)
-        print(tabulate(lista, tablefmt='grid', stralign='center'))
-
-    else:
-        print('Los',sample, 'primeros impuestos son:')
-        i=1
-        lista1= []
-        while i <=sample:
-            impuesto = lt.getElement(sort_books, i)
-            lista1.append(impuesto)
-            i+=1
-        print(tabulate(lista1, tablefmt='grid', stralign='center'))
-        print('los',sample, 'últimos libros ordenados son:')
-        i= size- sample +1
-        lista2= []
-        while i <=size:
-            impuesto = lt.getElement(sort_books, i)
-            lista2.append(impuesto)
-            i+=1
-        print(tabulate(lista2, tablefmt='grid', stralign='center'))
+    dicc_final= []
+    for datos in lista_1:
+        interno= {}
+        interno["Año"] = datos["Año"]
+        interno["Código actividad económica"] = datos["Código actividad económica"]
+        interno["Nombre actividad económica"] = datos["Nombre actividad económica"]
+        interno["Código sector económico"] = datos["Código sector económico"]
+        interno["Nombre sector económico"] = datos["Nombre sector económico"]
+        interno["Código subsector económico"] = datos["Código subsector económico"]
+        interno["Nombre subsector económico"] = datos["Nombre subsector económico"]
+        interno["Total ingresos netos"] = datos["Total ingresos netos"]
+        interno["Total costos y gastos"] = datos["Total costos y gastos"]
+        interno["Total saldo a pagar"] = datos["Total saldo a pagar"]
+        interno["Total saldo a favor"] = datos["Total saldo a favor"]
+        dicc_final.append(interno)
+    losimp =[]
+    first= 0
+    last= size-3
+    while first<sample:
+        datos= dicc_final[first]
+        losimp.append(datos)
+        first+= 1
+    while last<size:
+        datos= dicc_final[last]
+        losimp.append(datos)
+        last+=1
+    return losimp
 
 # Se crea el controlador asociado a la vista
 control = new_controller("ARRAY_LIST")
@@ -230,8 +232,8 @@ if __name__ == "__main__":
                 print("Cargando información de los archivos ....\n")
                 data = load_data(control)
                 sort_data_result = controller.sort(control)
-                printSortResults(sort_data_result[0])
-                "[]"
+                ordenado =printSortResults(sort_data_result[0])
+                print(tabulate(ordenado, headers="keys", stralign='center', tablefmt='grid', maxheadercolwidths=10))
                 print("El tiempo en milisegundo transcurridos fue de: ",str(sort_data_result[1]))
             
             elif int(inputs) == 2:
