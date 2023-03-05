@@ -124,7 +124,6 @@ def print_req_1(control):
     """
         Función que imprime la solución del Requerimiento 1 en consola
     """
-    # TODO: Imprimir el resultado del requerimiento 1
     respuesta= controller.req_1(control)
     dicc_final= []
     for datos in respuesta:
@@ -148,7 +147,6 @@ def print_req_2(control):
     """
         Función que imprime la solución del Requerimiento 2 en consola
     """
-    # TODO: Imprimir el resultado del requerimiento 2
     respuesta= controller.req_2(control)
     dicc_final= []
     for datos in respuesta:

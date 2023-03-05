@@ -150,7 +150,6 @@ def req_1(data_structs):
     """
     Función que soluciona el requerimiento 1
     """
-    # TODO: Realizar el requerimiento 1
     anios = organizar_anio(data_structs, "Año")
     
     mayor = lt.newList(datastructure="ARRAY_LIST")
