@@ -129,6 +129,23 @@ def data_size(data_structs):
     return lt.size(data_structs["data"])
 
 
+def organizar_anio (data_structs, categoria):
+    tamanio = data_size(data_structs)
+    i =0
+    anios = {}
+    while i < tamanio:
+        variable = lt.getElement(data_structs["data"],i)
+        momento = variable[categoria]
+        if variable[categoria] not in anios.keys():
+            anios[momento] = lt.newList(datastructure="ARRAY_LIST")
+            lt.addLast(anios[momento], variable )
+        elif variable[categoria] in anios.keys():
+            lt.addLast(anios[momento], variable  )
+        
+        i +=1
+    return anios
+
+
 def req_1(data_structs):
     """
     Función que soluciona el requerimiento 1
@@ -143,7 +160,7 @@ def req_2(data_structs):
     """
     Función que soluciona el requerimiento 2
     """
-    anios = sort(data_structs, "Año")
+    anios = organizar_anio(data_structs, "Año")
     
     mayor = lt.newList(datastructure="ARRAY_LIST")
     for fecha in anios.keys():
