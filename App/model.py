@@ -129,16 +129,6 @@ def data_size(data_structs):
     return lt.size(data_structs["data"])
 
 
-def req_1(data_structs):
-    """
-    Función que soluciona el requerimiento 1
-    """
-    # TODO: Realizar el requerimiento 1
-    lista= sort(data_structs)
-
-    print(lista)
-
-
 def organizar_anio (data_structs, categoria):
     tamanio = data_size(data_structs)
     i =0
@@ -154,6 +144,16 @@ def organizar_anio (data_structs, categoria):
         
         i +=1
     return anios
+
+
+def req_1(data_structs):
+    """
+    Función que soluciona el requerimiento 1
+    """
+    # TODO: Realizar el requerimiento 1
+    lista= sort(data_structs)
+
+    print(lista)
 
 
 def req_2(data_structs):
