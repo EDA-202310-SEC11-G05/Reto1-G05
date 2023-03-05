@@ -133,7 +133,23 @@ def print_req_2(control):
         Función que imprime la solución del Requerimiento 2 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 2
-    print(controller.req_2(control))
+    respuesta= controller.req_2(control)
+    dicc_final= []
+    for datos in respuesta:
+        interno= {}
+        interno["Año"] = datos["Año"]
+        interno["Código actividad económica"] = datos["Código actividad económica"]
+        interno["Nombre actividad económica"] = datos["Nombre actividad económica"]
+        interno["Código sector económico"] = datos["Código sector económico"]
+        interno["Nombre sector económico"] = datos["Nombre sector económico"]
+        interno["Código subsector económico"] = datos["Código subsector económico"]
+        interno["Nombre subsector económico"] = datos["Nombre subsector económico"]
+        interno["Total ingresos netos"] = datos["Total ingresos netos"]
+        interno["Total costos y gastos"] = datos["Total costos y gastos"]
+        interno["Total saldo a pagar"] = datos["Total saldo a pagar"]
+        interno["Total saldo a favor"] = datos["Total saldo a favor"]
+        dicc_final.append(interno)
+    print(tabulate(dicc_final, headers="keys", tablefmt= "grid"))
 
 
 def print_req_3(control):
