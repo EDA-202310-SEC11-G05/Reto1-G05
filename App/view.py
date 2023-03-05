@@ -140,7 +140,7 @@ def print_req_1(control):
         interno["Total saldo a pagar"] = datos["Total saldo a pagar"]
         interno["Total saldo a favor"] = datos["Total saldo a favor"]
         dicc_final.append(interno)
-    print(tabulate(dicc_final, headers="keys", tablefmt= "fancy_grid"))
+    print(tabulate(dicc_final, headers="keys", tablefmt= "grid"))
 
 
 def print_req_2(control):
