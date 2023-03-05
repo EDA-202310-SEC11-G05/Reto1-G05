@@ -110,7 +110,7 @@ def req_4(control):
     Retorna el resultado del requerimiento 4
     """
     # TODO: Modificar el requerimiento 4
-    req_4 = model.req_4(control["model"])
+    req_4 = model.req_4(control)
     return req_4
 
 
@@ -119,7 +119,7 @@ def req_5(control):
     Retorna el resultado del requerimiento 5
     """
     # TODO: Modificar el requerimiento 5
-    req_5 = model.req_5(control["model"])
+    req_5 = model.req_5(control)
     return req_5
 
 
