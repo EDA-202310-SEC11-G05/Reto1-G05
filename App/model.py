@@ -129,6 +129,8 @@ def data_size(data_structs):
     return lt.size(data_structs["data"])
 
 
+#Funciones de busqueda y arreglos por año.
+
 def organizar_anio (data_structs, categoria):
     tamanio = data_size(data_structs)
     i =0
@@ -146,10 +148,7 @@ def organizar_anio (data_structs, categoria):
     return anios
 
 
-def req_1(data_structs):
-    """
-    Función que soluciona el requerimiento 1
-    """
+def ayuda_req_1_y_2(data_structs,dato_a_comparar):
     anios = organizar_anio(data_structs, "Año")
     
     mayor = lt.newList(datastructure="ARRAY_LIST")
@@ -159,9 +158,9 @@ def req_1(data_structs):
         tamanio = lt.size(anios[fecha])
         while i < tamanio:
             exacto = lt.getElement(anios[fecha],i)
-            if int(exacto["Total saldo a pagar"])>b:
+            if int(exacto[dato_a_comparar])>b:
                 alto= exacto
-                b= int(exacto["Total saldo a pagar"])
+                b= int(exacto[dato_a_comparar])
             i+=1
         lt.addLast(mayor, alto)
     
@@ -184,42 +183,21 @@ def req_1(data_structs):
     return datos
 
 
+#Requerimientos
+
+def req_1(data_structs):
+    """
+    Función que soluciona el requerimiento 1
+    """
+    datos=  ayuda_req_1_y_2(data_structs,"Total saldo a pagar")
+    return datos
+
 
 def req_2(data_structs):
     """
     Función que soluciona el requerimiento 2
     """
-    anios = organizar_anio(data_structs, "Año")
-    
-    mayor = lt.newList(datastructure="ARRAY_LIST")
-    for fecha in anios.keys():
-        i =0
-        b= 0
-        tamanio = lt.size(anios[fecha])
-        while i < tamanio:
-            exacto = lt.getElement(anios[fecha],i)
-            if int(exacto["Total saldo a favor"])>b:
-                alto= exacto
-                b= int(exacto["Total saldo a favor"])
-            i+=1
-        lt.addLast(mayor, alto)
-    
-    respuesta = lt.newList("ARRAY_LIST")
-    for x in range( lt.size(mayor)):
-
-        superior = 0
-        a = 0
-        elim = 0
-        while a < lt.size(mayor):
-            pos = lt.getElement(mayor,a)
-            if  int(pos["Año"])>superior:
-                superior = int(pos["Año"])
-                elim = a
-                dict = pos
-            a+=1
-        lt.addFirst(respuesta, dict)
-        lt.deleteElement(mayor, elim)
-    datos = lt.iterator(respuesta)
+    datos= ayuda_req_1_y_2(data_structs,"Total saldo a favor")
     return datos
 
 
