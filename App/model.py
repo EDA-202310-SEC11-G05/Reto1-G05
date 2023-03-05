@@ -209,12 +209,29 @@ def req_3(data_structs):
     pass
 
 
-def req_4(data_structs):
+def req_4(data_structs)-> tuple:
+    """Muestra los primeros y últimos 3 impuestos organizada por costos
+       y gastos de nómina.
+    
+    Args:
+        data_structs: Estructura de datos
+    Returns:
+        tuple: Tupla en la que el primer elemento es la sublista conteniendo
+               los primeros 3 impuestos menores y el segundo es la sublista
+               conteniendo los últimos 3 impuestos mayores.
+
     """
-    Función que soluciona el requerimiento 4
-    """
-    # TODO: Realizar el requerimiento 4
-    pass
+    # Ordenamiento por Año/Costos y gastos de nómina
+    quk.sort(data_structs, sort_req4)
+    
+    # First three items by smaller Año/Costos y gastos de nómina
+    smaller = lt.subList(data_structs, 1, 3)
+
+    # First three items by smaller Año/Costos y gastos de nómina
+    bigger = lt.subList(data_structs, (lt.size(data_structs)-3), 3) 
+
+    return smaller, bigger
+    
 
 
 def req_5(data_structs):
@@ -285,6 +302,11 @@ def compare(data_1, data_2):
 
 # Funciones de ordenamiento
 
+def sort_req4(tax1, tax2):
+    if tax1["Año"] != tax2["Año"]:
+        return tax1["Año"] > tax2["Año"]
+    else:
+        return tax1["Costos y gastos nómina"] > tax2["Costos y gastos nómina"]
 
 def sort_criteria(impuesto_1, impuesto_2):
     """sortCriteria criterio de ordenamiento para las funciones de ordenamiento
