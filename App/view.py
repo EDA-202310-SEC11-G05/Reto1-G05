@@ -125,7 +125,23 @@ def print_req_1(control):
         Función que imprime la solución del Requerimiento 1 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 1
-    print(controller.req_1(control))
+    respuesta= controller.req_1(control)
+    dicc_final= []
+    for datos in respuesta:
+        interno= {}
+        interno["Año"] = datos["Año"]
+        interno["Código actividad económica"] = datos["Código actividad económica"]
+        interno["Nombre actividad económica"] = datos["Nombre actividad económica"]
+        interno["Código sector económico"] = datos["Código sector económico"]
+        interno["Nombre sector económico"] = datos["Nombre sector económico"]
+        interno["Código subsector económico"] = datos["Código subsector económico"]
+        interno["Nombre subsector económico"] = datos["Nombre subsector económico"]
+        interno["Total ingresos netos"] = datos["Total ingresos netos"]
+        interno["Total costos y gastos"] = datos["Total costos y gastos"]
+        interno["Total saldo a pagar"] = datos["Total saldo a pagar"]
+        interno["Total saldo a favor"] = datos["Total saldo a favor"]
+        dicc_final.append(interno)
+    print(tabulate(dicc_final, headers="keys", tablefmt= "fancy_grid"))
 
 
 def print_req_2(control):
@@ -149,7 +165,7 @@ def print_req_2(control):
         interno["Total saldo a pagar"] = datos["Total saldo a pagar"]
         interno["Total saldo a favor"] = datos["Total saldo a favor"]
         dicc_final.append(interno)
-    print(tabulate(dicc_final, headers="keys", tablefmt= "grid"))
+    print(tabulate(dicc_final, headers="keys", tablefmt= "fancy_grid"))
 
 
 def print_req_3(control):
@@ -157,7 +173,23 @@ def print_req_3(control):
         Función que imprime la solución del Requerimiento 3 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 3
-    print(controller.req_3(control))
+    dates= controller.req_3(control)
+    dicc_final= []
+    for datos in dates:
+        interno= {}
+        interno["Año"] = datos["Año"]
+        interno["Código actividad económica"] = datos["Código actividad económica"]
+        interno["Nombre actividad económica"] = datos["Nombre actividad económica"]
+        interno["Código sector económico"] = datos["Código sector económico"]
+        interno["Nombre sector económico"] = datos["Nombre sector económico"]
+        interno["Código subsector económico"] = datos["Código subsector económico"]
+        interno["Nombre subsector económico"] = datos["Nombre subsector económico"]
+        interno["Total ingresos netos"] = datos["Total ingresos netos"]
+        interno["Total costos y gastos"] = datos["Total costos y gastos"]
+        interno["Total saldo a pagar"] = datos["Total saldo a pagar"]
+        interno["Total saldo a favor"] = datos["Total saldo a favor"]
+        dicc_final.append(interno)
+    print(tabulate(dicc_final, headers="keys", tablefmt= "fancy_grid"))
 
 
 def print_req_4(control):

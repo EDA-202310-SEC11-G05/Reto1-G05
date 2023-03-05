@@ -151,9 +151,39 @@ def req_1(data_structs):
     Función que soluciona el requerimiento 1
     """
     # TODO: Realizar el requerimiento 1
-    lista= sort(data_structs)
+    anios = organizar_anio(data_structs, "Año")
+    
+    mayor = lt.newList(datastructure="ARRAY_LIST")
+    for fecha in anios.keys():
+        i =0
+        b=0
+        tamanio = lt.size(anios[fecha])
+        while i < tamanio:
+            exacto = lt.getElement(anios[fecha],i)
+            if int(exacto["Total saldo a pagar"])>b:
+                alto= exacto
+                b= int(exacto["Total saldo a pagar"])
+            i+=1
+        lt.addLast(mayor, alto)
+    
+    respuesta = lt.newList("ARRAY_LIST")
+    for x in range( lt.size(mayor)):
 
-    print(lista)
+        superior = 0
+        a = 0
+        elim = 0
+        while a < lt.size(mayor):
+            pos = lt.getElement(mayor,a)
+            if  int(pos["Año"])>superior:
+                superior = int(pos["Año"])
+                elim = a
+                dict = pos
+            a+=1
+        lt.addFirst(respuesta, dict)
+        lt.deleteElement(mayor, elim)
+    datos = lt.iterator(respuesta)
+    return datos
+
 
 
 def req_2(data_structs):
@@ -165,11 +195,13 @@ def req_2(data_structs):
     mayor = lt.newList(datastructure="ARRAY_LIST")
     for fecha in anios.keys():
         i =0
+        b= 0
         tamanio = lt.size(anios[fecha])
         while i < tamanio:
             exacto = lt.getElement(anios[fecha],i)
-            if int(exacto["Total saldo a favor"])>i:
+            if int(exacto["Total saldo a favor"])>b:
                 alto= exacto
+                b= int(exacto["Total saldo a favor"])
             i+=1
         lt.addLast(mayor, alto)
     
