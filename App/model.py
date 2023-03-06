@@ -1,4 +1,4 @@
-﻿"""
+"""
  * Copyright 2020, Departamento de sistemas y Computación,
  * Universidad de Los Andes
  *
@@ -209,6 +209,9 @@ def req_4_withholdings(data_structs)-> dict:
                los primeros 3 impuestos menores y el segundo es la sublista
                conteniendo los últimos 3 impuestos mayores.
 
+def req_4(data_structs):
+    """
+    Función que soluciona el requerimiento 4
     """
 
     data = data_structs["model"]
