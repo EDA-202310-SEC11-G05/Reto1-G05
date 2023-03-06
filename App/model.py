@@ -86,65 +86,26 @@ def add_data(data_structs, data):
 # Funciones para creacion de datos
 
 def new_data(Anio,Codigo_actividad_económica,Nombre_actividad_economica,Codigo_sector_economico,Nombre_sector_economico,Codigo_subsector_economico,Nombre_subsector_economico,Costos_y_gastos_nomina,Aportes_seguridad,Aportes_a_entidades,Efectivo_y_equivalentes,Inversiones_e_instrumentos,Cuentas_y_otros_por_cobrar,Inventarios,Propiedades,Otros_activos,Total_patrimonio_bruto,Pasivos,Total_patrimonio_liquido,Ingresos_ordinarios,Ingresos_financieros,Otros_ingresos,Total_ingresos_brutos,Devoluciones_rebajas,Ingresos_no_renta,Total_ingresos_netos,Costos,Gastos_administracion,Gastos_distribucion,Gastos_financieros,Otros_gastos,Total_costos_y_gastos,Renta_liquida_ordinaria,Perdida_liquida,Compensaciones,Renta_liquida,Renta_presuntiva,Renta_exenta,Rentas_gravables,Renta_liquida_gravable,Ingresos_ganancias_ocasionales,Costos_ganancias_ocasionales,Ganancias_ocasionales_no_gravadas,Ganancias_ocasionales_gravables,Impuesto_RLG,Descuentos_tributarios,Impuesto_neto_de_renta,Impuesto_ganancias_ocasionales,Total_Impuesto_a_cargo,Anticipo_renta_anio_anterior,Saldo_a_favor_anio_anterior,Autorretenciones,Otras_retenciones,Total_retenciones, Anticipo_renta_siguiente_anio,Saldo_a_pagar_por_impuesto,Sanciones,Total_saldo_a_pagar,Total_saldo_a_favor):
-    data= {"Año":Anio,
-           "Código actividad económica":Codigo_actividad_económica,
-           "Nombre actividad económica":Nombre_actividad_economica,
-           "Código sector económico":Codigo_sector_economico,
-           "Nombre sector económico":Nombre_sector_economico,
-           "Código subsector económico":Codigo_subsector_economico,
-           "Nombre subsector económico":Nombre_subsector_economico,
-           "Costos y gastos nómina":Costos_y_gastos_nomina,
-           "Aportes seguridad":Aportes_seguridad,
-           "Aportes a entidades":Aportes_a_entidades,
-           "Efectivo y equivalentes":Efectivo_y_equivalentes,
-           "Inversiones e instrumentos":Inversiones_e_instrumentos,
-           "Cuentas y otros por cobrar":Cuentas_y_otros_por_cobrar,
-           "Inventarios":Inventarios,
-           "Propiedades":Propiedades,
-           "Otros activos":Otros_activos,
-           "Total patrimonio bruto":Total_patrimonio_bruto,
-           "Pasivos":Pasivos,
-           "Total patrimonio líquido":Total_patrimonio_liquido,
-           "Ingresos ordinarios":Ingresos_ordinarios,
-           "Ingresos financieros":Ingresos_financieros,
-           "Otros ingresos":Otros_ingresos,
-           "Total ingresos brutos":Total_ingresos_brutos,
-           "Devoluciones, rebajas":Devoluciones_rebajas,
-           "Ingresos no renta":Ingresos_no_renta,
-           "Total ingresos netos":Total_ingresos_netos,
-           "Costos":Costos,
-           "Gastos administración":Gastos_administracion,
-           "Gastos distribución":Gastos_distribucion,
-           "Gastos financieros":Gastos_financieros,
-           "Otros gastos":Otros_gastos,
-           "Total costos y gastos":Total_costos_y_gastos,
-           "Renta líquida ordinaria":Renta_liquida_ordinaria,
-           "Pérdida líquida":Perdida_liquida,
-           "Compensaciones":Compensaciones,
-           "Renta líquida":Renta_liquida,
-           "Renta presuntiva":Renta_presuntiva,
-           "Renta exenta":Renta_exenta,
-           "Rentas gravables":Rentas_gravables,
-           "Renta líquida gravable":Renta_liquida_gravable,
-           "Ingresos ganancias ocasionales":Ingresos_ganancias_ocasionales,
-           "Costos ganancias ocasionales":Costos_ganancias_ocasionales,
-           "Ganancias ocasionales no gravadas":Ganancias_ocasionales_no_gravadas,
-           "Ganancias ocasionales gravables":Ganancias_ocasionales_gravables,
-           "Impuesto RLG":Impuesto_RLG,
-           "Descuentos tributarios":Descuentos_tributarios,
-           "Impuesto neto de renta":Impuesto_neto_de_renta,
-           "Impuesto ganancias ocasionales":Impuesto_ganancias_ocasionales,
-           "Total Impuesto a cargo":Total_Impuesto_a_cargo,
-           "Anticipo renta año anterior":Anticipo_renta_anio_anterior,
-           "Saldo a favor año anterior":Saldo_a_favor_anio_anterior,
-           "Autorretenciones":Autorretenciones,
-           "Otras retenciones":Otras_retenciones,
-           "Total retenciones":Total_retenciones,
-           "Anticipo renta siguiente año":Anticipo_renta_siguiente_anio,
-           "Saldo a pagar por impuesto":Saldo_a_pagar_por_impuesto,
-           "Sanciones":Sanciones,
-           "Total saldo a pagar":Total_saldo_a_pagar,
-           "Total saldo a favor":Total_saldo_a_favor}
+    data= {"Año":Anio,"Código actividad económica":Codigo_actividad_económica,"Nombre actividad económica":Nombre_actividad_economica,
+           "Código sector económico":Codigo_sector_economico,"Nombre sector económico":Nombre_sector_economico,
+           "Código subsector económico":Codigo_subsector_economico,"Nombre subsector económico":Nombre_subsector_economico,
+           "Costos y gastos nómina":Costos_y_gastos_nomina,"Aportes seguridad":Aportes_seguridad,"Aportes a entidades":Aportes_a_entidades,
+           "Efectivo y equivalentes":Efectivo_y_equivalentes,"Inversiones e instrumentos":Inversiones_e_instrumentos,
+           "Cuentas y otros por cobrar":Cuentas_y_otros_por_cobrar,"Inventarios":Inventarios,"Propiedades":Propiedades,"Otros activos":Otros_activos,
+           "Total patrimonio bruto":Total_patrimonio_bruto,"Pasivos":Pasivos,"Total patrimonio líquido":Total_patrimonio_liquido,
+           "Ingresos ordinarios":Ingresos_ordinarios,"Ingresos financieros":Ingresos_financieros,"Otros ingresos":Otros_ingresos,
+           "Total ingresos brutos":Total_ingresos_brutos,"Devoluciones, rebajas":Devoluciones_rebajas,"Ingresos no renta":Ingresos_no_renta,
+           "Total ingresos netos":Total_ingresos_netos,"Costos":Costos,"Gastos administración":Gastos_administracion,"Gastos distribución":Gastos_distribucion,
+           "Gastos financieros":Gastos_financieros,"Otros gastos":Otros_gastos,"Total costos y gastos":Total_costos_y_gastos,
+           "Renta líquida ordinaria":Renta_liquida_ordinaria,"Pérdida líquida":Perdida_liquida,"Compensaciones":Compensaciones,"Renta líquida":Renta_liquida,
+           "Renta presuntiva":Renta_presuntiva,"Renta exenta":Renta_exenta,"Rentas gravables":Rentas_gravables,"Renta líquida gravable":Renta_liquida_gravable,
+           "Ingresos ganancias ocasionales":Ingresos_ganancias_ocasionales,"Costos ganancias ocasionales":Costos_ganancias_ocasionales,
+           "Ganancias ocasionales no gravadas":Ganancias_ocasionales_no_gravadas,"Ganancias ocasionales gravables":Ganancias_ocasionales_gravables,
+           "Impuesto RLG":Impuesto_RLG,"Descuentos tributarios":Descuentos_tributarios,"Impuesto neto de renta":Impuesto_neto_de_renta,
+           "Impuesto ganancias ocasionales":Impuesto_ganancias_ocasionales,"Total Impuesto a cargo":Total_Impuesto_a_cargo,
+           "Anticipo renta año anterior":Anticipo_renta_anio_anterior,"Saldo a favor año anterior":Saldo_a_favor_anio_anterior,"Autorretenciones":Autorretenciones,
+           "Otras retenciones":Otras_retenciones,"Total retenciones":Total_retenciones,"Anticipo renta siguiente año":Anticipo_renta_siguiente_anio,
+           "Saldo a pagar por impuesto":Saldo_a_pagar_por_impuesto,"Sanciones":Sanciones,"Total saldo a pagar":Total_saldo_a_pagar,"Total saldo a favor":Total_saldo_a_favor}
     return data
 
 
@@ -245,27 +206,12 @@ def req_3(data_structs):
     Función que soluciona el requerimiento 3
     """
     # TODO: Realizar el requerimiento 3
-    
     pass
 
-def req_4(data_structs)-> tuple:
-    
-    years = req_4_withholdings(data_structs)
-    smaller, bigger = req4_smaller_bigger_withholdings(data_structs) 
-    
-    return years, smaller, bigger
 
-def req_4_withholdings(data_structs)-> dict:
-    """Muestra los primeros y últimos 3 impuestos organizados por costos
-       y gastos de nómina.
-    
-    Args:
-        data_structs: Estructura de datos
-    Returns:
-        tuple: Tupla en la que el primer elemento es la sublista conteniendo
-               los primeros 3 impuestos menores y el segundo es la sublista
-               conteniendo los últimos 3 impuestos mayores.
-
+def req_4(data_structs):
+    """
+    Función que soluciona el requerimiento 4
     """
 
     data = data_structs["model"]
@@ -302,7 +248,6 @@ def req4_smaller_bigger_withholdings(data_structs)-> tuple:
     bigger = lt.subList(data_structs["model"]["data"], size-3, 3) 
 
     return smaller, bigger
-    
 
 
 def req_5(data_structs):
