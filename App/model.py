@@ -354,7 +354,7 @@ def req4_smaller_bigger_withholdings(data_structs)-> tuple:
 
 def req_5(data_structs):
     """
-        # Función que soluciona el requerimiento 5
+    Función que soluciona el requerimiento 5
     """
     # TODO: Realizar el requerimiento 5
     pass
