@@ -1,4 +1,4 @@
-"""
+﻿"""
  * Copyright 2020, Departamento de sistemas y Computación,
  * Universidad de Los Andes
  *
@@ -168,20 +168,76 @@ def data_size(data_structs):
     return lt.size(data_structs["data"])
 
 
+#Funciones de busqueda y arreglos por año.
+
+def organizar_anio (data_structs, categoria):
+    tamanio = data_size(data_structs)
+    i =0
+    anios = {}
+    while i < tamanio:
+        variable = lt.getElement(data_structs["data"],i)
+        momento = variable[categoria]
+        if variable[categoria] not in anios.keys():
+            anios[momento] = lt.newList(datastructure="ARRAY_LIST")
+            lt.addLast(anios[momento], variable )
+        elif variable[categoria] in anios.keys():
+            lt.addLast(anios[momento], variable  )
+        
+        i +=1
+    return anios
+
+
+def ayuda_req_1_y_2(data_structs,dato_a_comparar):
+    anios = organizar_anio(data_structs, "Año")
+    
+    mayor = lt.newList(datastructure="ARRAY_LIST")
+    for fecha in anios.keys():
+        i =0
+        b=0
+        tamanio = lt.size(anios[fecha])
+        while i < tamanio:
+            exacto = lt.getElement(anios[fecha],i)
+            if int(exacto[dato_a_comparar])>b:
+                alto= exacto
+                b= int(exacto[dato_a_comparar])
+            i+=1
+        lt.addLast(mayor, alto)
+    
+    respuesta = lt.newList("ARRAY_LIST")
+    for x in range( lt.size(mayor)):
+
+        superior = 0
+        a = 0
+        elim = 0
+        while a < lt.size(mayor):
+            pos = lt.getElement(mayor,a)
+            if  int(pos["Año"])>superior:
+                superior = int(pos["Año"])
+                elim = a
+                dict = pos
+            a+=1
+        lt.addFirst(respuesta, dict)
+        lt.deleteElement(mayor, elim)
+    datos = lt.iterator(respuesta)
+    return datos
+
+
+#Requerimientos
+
 def req_1(data_structs):
     """
     Función que soluciona el requerimiento 1
     """
-    # TODO: Realizar el requerimiento 1
-    pass
+    datos=  ayuda_req_1_y_2(data_structs,"Total saldo a pagar")
+    return datos
 
 
 def req_2(data_structs):
     """
     Función que soluciona el requerimiento 2
     """
-    # TODO: Realizar el requerimiento 2
-    pass
+    datos= ayuda_req_1_y_2(data_structs,"Total saldo a favor")
+    return datos
 
 
 def req_3(data_structs):
@@ -189,6 +245,7 @@ def req_3(data_structs):
     Función que soluciona el requerimiento 3
     """
     # TODO: Realizar el requerimiento 3
+    
     pass
 
 def req_4(data_structs)-> tuple:
@@ -209,9 +266,6 @@ def req_4_withholdings(data_structs)-> dict:
                los primeros 3 impuestos menores y el segundo es la sublista
                conteniendo los últimos 3 impuestos mayores.
 
-def req_4(data_structs):
-    """
-    Función que soluciona el requerimiento 4
     """
 
     data = data_structs["model"]
@@ -319,11 +373,6 @@ def compare(data_1, data_2):
 
 # Funciones de ordenamiento
 
-def sort_req4(tax1, tax2):
-    if tax1["Año"] != tax2["Año"]:
-        return tax1["Año"] > tax2["Año"]
-    else:
-        return tax1["Costos y gastos nómina"] > tax2["Costos y gastos nómina"]
 
 def sort_criteria(impuesto_1, impuesto_2):
     """sortCriteria criterio de ordenamiento para las funciones de ordenamiento
@@ -345,25 +394,7 @@ def sort_criteria(impuesto_1, impuesto_2):
         return(float(cod_1)>float(cod_2))
 
 
-def sort(data_structs, tipo):
-    if tipo == 1:
-        sub_list = lt.subList(data_structs['data'],1,data_size(data_structs))
-        lista =ins.sort(sub_list, sort_criteria)
-
-    elif tipo == 2:
-
-        sub_list = lt.subList(data_structs['data'],1,data_size(data_structs))
-        lista =se.sort(sub_list, sort_criteria)
-    elif tipo == 3:
-        sub_list = lt.subList(data_structs['data'],1,data_size(data_structs))
-        lista =sa.sort(sub_list, sort_criteria)
-
-    elif tipo == 4:
-        sub_list = lt.subList(data_structs['data'],1,data_size(data_structs))
-        lista =quk.sort(sub_list, sort_criteria)
-    elif tipo == 5:
-        sub_list = lt.subList(data_structs['data'],1,data_size(data_structs))
-        lista =merg.sort(sub_list, sort_criteria)
-        
-    
+def sort(data_structs):
+    sub_list = lt.subList(data_structs['data'],1,data_size(data_structs))
+    lista = merg.sort(sub_list, sort_criteria)
     return lista
