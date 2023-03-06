@@ -28,6 +28,7 @@ from DISClib.ADT import stack as st
 from DISClib.ADT import queue as qu
 assert cf
 from tabulate import tabulate
+tabulate.PRESERVE_WHITESPACE = False
 import traceback
 
 """
@@ -129,18 +130,18 @@ def print_req_1(control):
     for datos in respuesta:
         interno= {}
         interno["Año"] = datos["Año"]
-        interno["Código actividad económica"] = datos["Código actividad económica"]
-        interno["Nombre actividad económica"] = datos["Nombre actividad económica"]
-        interno["Código sector económico"] = datos["Código sector económico"]
-        interno["Nombre sector económico"] = datos["Nombre sector económico"]
-        interno["Código subsector económico"] = datos["Código subsector económico"]
-        interno["Nombre subsector económico"] = datos["Nombre subsector económico"]
-        interno["Total ingresos netos"] = datos["Total ingresos netos"]
-        interno["Total costos y gastos"] = datos["Total costos y gastos"]
-        interno["Total saldo a pagar"] = datos["Total saldo a pagar"]
-        interno["Total saldo a favor"] = datos["Total saldo a favor"]
+        interno["Código actividad\neconómica"] = datos["Código actividad económica"]
+        interno["Nombre actividad\neconómica"] = datos["Nombre actividad económica"]
+        interno["Código sector\neconómico"] = datos["Código sector económico"]
+        interno["Nombre sector\neconómico"] = datos["Nombre sector económico"]
+        interno["Código subsector\neconómico"] = datos["Código subsector económico"]
+        interno["Nombre subsector\neconómico"] = datos["Nombre subsector económico"]
+        interno["Total ingresos\nnetos"] = datos["Total ingresos netos"]
+        interno["Total\ncostos y gastos"] = datos["Total costos y gastos"]
+        interno["Total\nsaldo a pagar"] = datos["Total saldo a pagar"]
+        interno["Total\nsaldo a favor"] = datos["Total saldo a favor"]
         dicc_final.append(interno)
-    print(tabulate(dicc_final, headers="keys", tablefmt= "grid"))
+    print(tabulate(dicc_final, headers="keys", tablefmt= "fancy_grid", stralign= "None", maxcolwidths=15))
 
 
 def print_req_2(control):
@@ -152,18 +153,18 @@ def print_req_2(control):
     for datos in respuesta:
         interno= {}
         interno["Año"] = datos["Año"]
-        interno["Código actividad económica"] = datos["Código actividad económica"]
-        interno["Nombre actividad económica"] = datos["Nombre actividad económica"]
-        interno["Código sector económico"] = datos["Código sector económico"]
-        interno["Nombre sector económico"] = datos["Nombre sector económico"]
-        interno["Código subsector económico"] = datos["Código subsector económico"]
-        interno["Nombre subsector económico"] = datos["Nombre subsector económico"]
-        interno["Total ingresos netos"] = datos["Total ingresos netos"]
-        interno["Total costos y gastos"] = datos["Total costos y gastos"]
-        interno["Total saldo a pagar"] = datos["Total saldo a pagar"]
-        interno["Total saldo a favor"] = datos["Total saldo a favor"]
+        interno["Código actividad\neconómica"] = datos["Código actividad económica"]
+        interno["Nombre actividad\neconómica"] = datos["Nombre actividad económica"]
+        interno["Código sector\neconómico"] = datos["Código sector económico"]
+        interno["Nombre sector\neconómico"] = datos["Nombre sector económico"]
+        interno["Código subsector\neconómico"] = datos["Código subsector económico"]
+        interno["Nombre subsector\neconómico"] = datos["Nombre subsector económico"]
+        interno["Total ingresos\nnetos"] = datos["Total ingresos netos"]
+        interno["Total\ncostos y gastos"] = datos["Total costos y gastos"]
+        interno["Total\nsaldo a pagar"] = datos["Total saldo a pagar"]
+        interno["Total\nsaldo a favor"] = datos["Total saldo a favor"]
         dicc_final.append(interno)
-    print(tabulate(dicc_final, headers="keys", tablefmt= "fancy_grid"))
+    print(tabulate(dicc_final, headers="keys", tablefmt= "fancy_grid", stralign= "None", maxcolwidths=15))
 
 
 def print_req_3(control):
@@ -172,22 +173,7 @@ def print_req_3(control):
     """
     # TODO: Imprimir el resultado del requerimiento 3
     dates= controller.req_3(control)
-    dicc_final= []
-    for datos in dates:
-        interno= {}
-        interno["Año"] = datos["Año"]
-        interno["Código actividad económica"] = datos["Código actividad económica"]
-        interno["Nombre actividad económica"] = datos["Nombre actividad económica"]
-        interno["Código sector económico"] = datos["Código sector económico"]
-        interno["Nombre sector económico"] = datos["Nombre sector económico"]
-        interno["Código subsector económico"] = datos["Código subsector económico"]
-        interno["Nombre subsector económico"] = datos["Nombre subsector económico"]
-        interno["Total ingresos netos"] = datos["Total ingresos netos"]
-        interno["Total costos y gastos"] = datos["Total costos y gastos"]
-        interno["Total saldo a pagar"] = datos["Total saldo a pagar"]
-        interno["Total saldo a favor"] = datos["Total saldo a favor"]
-        dicc_final.append(interno)
-    print(tabulate(dicc_final, headers="keys", tablefmt= "fancy_grid"))
+    print(dates)
 
 
 def print_req_4(control):
@@ -236,29 +222,29 @@ def printSortResults(sort_books, sample=3):
     for datos in lista_1:
         interno= {}
         interno["Año"] = datos["Año"]
-        interno["Código actividad económica"] = datos["Código actividad económica"]
-        interno["Nombre actividad económica"] = datos["Nombre actividad económica"]
-        interno["Código sector económico"] = datos["Código sector económico"]
-        interno["Nombre sector económico"] = datos["Nombre sector económico"]
-        interno["Código subsector económico"] = datos["Código subsector económico"]
-        interno["Nombre subsector económico"] = datos["Nombre subsector económico"]
-        interno["Total ingresos netos"] = datos["Total ingresos netos"]
-        interno["Total costos y gastos"] = datos["Total costos y gastos"]
-        interno["Total saldo a pagar"] = datos["Total saldo a pagar"]
-        interno["Total saldo a favor"] = datos["Total saldo a favor"]
+        interno["Código actividad\neconómica"] = datos["Código actividad económica"]
+        interno["Nombre actividad\neconómica"] = datos["Nombre actividad económica"]
+        interno["Código sector\neconómico"] = datos["Código sector económico"]
+        interno["Nombre sector\neconómico"] = datos["Nombre sector económico"]
+        interno["Código subsector\neconómico"] = datos["Código subsector económico"]
+        interno["Nombre subsector\neconómico"] = datos["Nombre subsector económico"]
+        interno["Total ingresos\nnetos"] = datos["Total ingresos netos"]
+        interno["Total\ncostos y gastos"] = datos["Total costos y gastos"]
+        interno["Total\nsaldo a pagar"] = datos["Total saldo a pagar"]
+        interno["Total\nsaldo a favor"] = datos["Total saldo a favor"]
         dicc_final.append(interno)
     losimp =[]
     first= 0
     last= size-3
-    while first<sample:
-        datos= dicc_final[first]
-        losimp.append(datos)
-        first+= 1
     while last<size:
         datos= dicc_final[last]
         losimp.append(datos)
         last+=1
-    return losimp
+    while first<sample:
+        datos= dicc_final[first]
+        losimp.append(datos)
+        first+= 1
+    print(tabulate(losimp, headers="keys", tablefmt= "fancy_grid", stralign= "None", maxcolwidths=15))
 
 # Se crea el controlador asociado a la vista
 control = new_controller("ARRAY_LIST")
@@ -278,8 +264,8 @@ if __name__ == "__main__":
                 print("Cargando información de los archivos ....\n")
                 data = load_data(control)
                 sort_data_result = controller.sort(control)
+                print("Las 3 ultimas y 3 primeras actividades economicas son:")
                 ordenado =printSortResults(sort_data_result[0])
-                print(tabulate(ordenado, headers="keys", stralign='center', tablefmt='fancy_grid', maxheadercolwidths=10))
                 print("El tiempo en milisegundo transcurridos fue de: ",str(sort_data_result[1]))
             
             elif int(inputs) == 2:
