@@ -213,8 +213,41 @@ def req_4(data_structs):
     """
     Función que soluciona el requerimiento 4
     """
-    # TODO: Realizar el requerimiento 4
-    pass
+
+    data = data_structs["model"]
+    
+    # Ordenamiento por Año/Costos y gastos de nómina
+    quk.sort(data["data"], sort_req4)
+    
+    keys = ["Año", 
+            "Código sector económico", 
+            "Nombre sector económico", 
+            "Código subsector económico", 
+            "Nombre subsector económico", 
+            "Costos y gastos nómina", 
+            "Total ingresos netos", 
+            "Total costos y gastos", 
+            "Total saldo a pagar", 
+            "Total saldo a favor"]
+    
+    years = {}
+    
+    for item in range(0, lt.size(data["data"])):
+        if data["data"]["elements"][item]["Año"] not in years:
+            year = {key: data["data"]["elements"][item] for key in keys} 
+            years[data["data"]["elements"][item]["Año"]] = year
+    
+    return years
+   
+def req4_smaller_bigger_withholdings(data_structs)-> tuple:
+    # First three items by smaller Año/Costos y gastos de nómina
+    smaller = lt.subList(data_structs["model"]["data"], 1, 3)
+    
+    size = lt.size(data_structs["model"]["data"])
+    # First three items by smaller Año/Costos y gastos de nómina
+    bigger = lt.subList(data_structs["model"]["data"], size-3, 3) 
+
+    return smaller, bigger
 
 
 def req_5(data_structs):
@@ -284,6 +317,12 @@ def compare(data_1, data_2):
         return 0
 
 # Funciones de ordenamiento
+
+def sort_req4(tax1, tax2):
+    if tax1["Año"] != tax2["Año"]:
+        return tax1["Año"] > tax2["Año"]
+    else:
+        return tax1["Costos y gastos nómina"] > tax2["Costos y gastos nómina"]
 
 
 def sort_criteria(impuesto_1, impuesto_2):
