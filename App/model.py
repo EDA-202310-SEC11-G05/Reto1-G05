@@ -455,5 +455,5 @@ def sort_criteria(impuesto_1, impuesto_2):
 
 def sort(data_structs):
     sub_list = lt.subList(data_structs['data'],1,data_size(data_structs))
-    lista = merg.sort(sub_list, sort_criteria)
+    lista = quk.sort(sub_list, sort_criteria)
     return lista

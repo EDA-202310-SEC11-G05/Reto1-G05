@@ -244,7 +244,7 @@ def printSortResults(sort_books, sample=3):
         datos= dicc_final[first]
         losimp.append(datos)
         first+= 1
-    print(tabulate(losimp, headers="keys", tablefmt= "fancy_grid", stralign= "None", maxcolwidths=15))
+    print(tabulate(losimp, headers="keys", tablefmt= "fancy_grid", stralign= "Center", maxcolwidths=15))
 
 # Se crea el controlador asociado a la vista
 control = new_controller("ARRAY_LIST")
