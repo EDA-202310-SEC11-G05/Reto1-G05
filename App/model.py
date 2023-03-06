@@ -206,7 +206,40 @@ def req_3(data_structs):
     Función que soluciona el requerimiento 3
     """
     # TODO: Realizar el requerimiento 3
-    pass
+    anios = organizar_anio(data_structs, "Año")
+    dato_a_comparar= "Total retenciones"
+    mayor = lt.newList(datastructure="ARRAY_LIST")
+    for fecha in anios.keys():
+        i =0
+        b=0
+        m= 0
+        tamanio = lt.size(anios[fecha])
+        while i < tamanio:
+            exacto = lt.getElement(anios[fecha],i)
+            if int(exacto[dato_a_comparar])>=b and int(exacto[dato_a_comparar])<m:
+                alto= exacto
+                b= int(exacto[dato_a_comparar])
+                m= int(exacto[dato_a_comparar])
+            i+=1
+        lt.addLast(mayor, alto)
+    
+    respuesta = lt.newList("ARRAY_LIST")
+    for x in range( lt.size(mayor)):
+
+        superior = 0
+        a = 0
+        elim = 0
+        while a < lt.size(mayor):
+            pos = lt.getElement(mayor,a)
+            if  int(pos["Año"])>superior:
+                superior = int(pos["Año"])
+                elim = a
+                dict = pos
+            a+=1
+        lt.addFirst(respuesta, dict)
+        lt.deleteElement(mayor, elim)
+    datos = lt.iterator(respuesta)
+    return datos
 
 
 def req_4(data_structs):
