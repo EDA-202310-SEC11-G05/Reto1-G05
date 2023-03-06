@@ -318,6 +318,12 @@ def compare(data_1, data_2):
 
 # Funciones de ordenamiento
 
+def sort_req4(tax1, tax2):
+    if tax1["Año"] != tax2["Año"]:
+        return tax1["Año"] > tax2["Año"]
+    else:
+        return tax1["Costos y gastos nómina"] > tax2["Costos y gastos nómina"]
+
 
 def sort_criteria(impuesto_1, impuesto_2):
     """sortCriteria criterio de ordenamiento para las funciones de ordenamiento
