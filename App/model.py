@@ -267,42 +267,36 @@ def req_4(data_structs):
     """
     Función que soluciona el requerimiento 4
     """
-
-    data = data_structs["model"]
+    anios= organizar_anio(data_structs["data"], "Año")
+    mayor= lt.newList(datastructure="ARRAY_LIST")
+    for fecha in anios.keys():
+        i=0
+        b=0
+        tamanio= lt.size(anios[fecha])
+        while i < tamanio:
+            exacto= lt.getElement(anios[fecha],i)
+            if int(exacto["Costos y gastos nómina"])>b:
+                alto= exacto
+                b= int(exacto["Costos y gastos nómina"])
+            i+=1
+        lt.addLast(mayor, alto)
+    respuesta= lt.newList("ARRAY_LIST")
+    for x in range( lt.size(mayor)):
+        superior = 0
+        a = 0
+        elim = 0
+        while a < lt.size(mayor):
+            pos = lt.getElement(mayor,a)
+            if  int(pos["Año"])>superior:
+                superior = int(pos["Año"])
+                elim = a
+                dict = pos
+            a+=1
+        lt.addFirst(respuesta, dict)
+        lt.deleteElement(mayor, elim)
+    datos = lt.iterator(respuesta)
+    return datos
     
-    # Ordenamiento por Año/Costos y gastos de nómina
-    quk.sort(data["data"], sort_req4)
-    
-    keys = ["Año", 
-            "Código sector económico", 
-            "Nombre sector económico", 
-            "Código subsector económico", 
-            "Nombre subsector económico", 
-            "Costos y gastos nómina", 
-            "Total ingresos netos", 
-            "Total costos y gastos", 
-            "Total saldo a pagar", 
-            "Total saldo a favor"]
-    
-    years = {}
-    
-    for item in range(0, lt.size(data["data"])):
-        if data["data"]["elements"][item]["Año"] not in years:
-            year = {key: data["data"]["elements"][item] for key in keys} 
-            years[data["data"]["elements"][item]["Año"]] = year
-    
-    return years
-   
-def req4_smaller_bigger_withholdings(data_structs)-> tuple:
-    # First three items by smaller Año/Costos y gastos de nómina
-    smaller = lt.subList(data_structs["model"]["data"], 1, 3)
-    
-    size = lt.size(data_structs["model"]["data"])
-    # First three items by smaller Año/Costos y gastos de nómina
-    bigger = lt.subList(data_structs["model"]["data"], size-3, 3) 
-
-    return smaller, bigger
-
 
 def req_5(data_structs):
     """
