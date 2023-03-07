@@ -37,7 +37,28 @@ Presenta el menu de opciones y por cada seleccion
 se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
+#Funciones auxiliares
 
+def crear_lista_con_datos(data_estructure):
+    lista= []
+    for datos in data_estructure:
+        interno= {}
+        interno["Año"] = datos["Año"]
+        interno["Código actividad\neconómica"] = datos["Código actividad económica"]
+        interno["Nombre actividad\neconómica"] = datos["Nombre actividad económica"]
+        interno["Código sector\neconómico"] = datos["Código sector económico"]
+        interno["Nombre sector\neconómico"] = datos["Nombre sector económico"]
+        interno["Código subsector\neconómico"] = datos["Código subsector económico"]
+        interno["Nombre subsector\neconómico"] = datos["Nombre subsector económico"]
+        interno["Total ingresos\nnetos"] = datos["Total ingresos netos"]
+        interno["Total\ncostos y gastos"] = datos["Total costos y gastos"]
+        interno["Total\nsaldo a pagar"] = datos["Total saldo a pagar"]
+        interno["Total\nsaldo a favor"] = datos["Total saldo a favor"]
+        lista.append(interno)
+    return lista
+
+
+#Esqueleto
 
 def new_controller(type):
     """
@@ -126,22 +147,8 @@ def print_req_1(control):
         Función que imprime la solución del Requerimiento 1 en consola
     """
     respuesta= controller.req_1(control)
-    dicc_final= []
-    for datos in respuesta:
-        interno= {}
-        interno["Año"] = datos["Año"]
-        interno["Código actividad\neconómica"] = datos["Código actividad económica"]
-        interno["Nombre actividad\neconómica"] = datos["Nombre actividad económica"]
-        interno["Código sector\neconómico"] = datos["Código sector económico"]
-        interno["Nombre sector\neconómico"] = datos["Nombre sector económico"]
-        interno["Código subsector\neconómico"] = datos["Código subsector económico"]
-        interno["Nombre subsector\neconómico"] = datos["Nombre subsector económico"]
-        interno["Total ingresos\nnetos"] = datos["Total ingresos netos"]
-        interno["Total\ncostos y gastos"] = datos["Total costos y gastos"]
-        interno["Total\nsaldo a pagar"] = datos["Total saldo a pagar"]
-        interno["Total\nsaldo a favor"] = datos["Total saldo a favor"]
-        dicc_final.append(interno)
-    print(tabulate(dicc_final, headers="keys", tablefmt= "fancy_grid", stralign= "None", maxcolwidths=15))
+    dicc_final= crear_lista_con_datos(respuesta)
+    print(tabulate(dicc_final, headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=15))
 
 
 def print_req_2(control):
@@ -149,22 +156,9 @@ def print_req_2(control):
         Función que imprime la solución del Requerimiento 2 en consola
     """
     respuesta= controller.req_2(control)
-    dicc_final= []
-    for datos in respuesta:
-        interno= {}
-        interno["Año"] = datos["Año"]
-        interno["Código actividad\neconómica"] = datos["Código actividad económica"]
-        interno["Nombre actividad\neconómica"] = datos["Nombre actividad económica"]
-        interno["Código sector\neconómico"] = datos["Código sector económico"]
-        interno["Nombre sector\neconómico"] = datos["Nombre sector económico"]
-        interno["Código subsector\neconómico"] = datos["Código subsector económico"]
-        interno["Nombre subsector\neconómico"] = datos["Nombre subsector económico"]
-        interno["Total ingresos\nnetos"] = datos["Total ingresos netos"]
-        interno["Total\ncostos y gastos"] = datos["Total costos y gastos"]
-        interno["Total\nsaldo a pagar"] = datos["Total saldo a pagar"]
-        interno["Total\nsaldo a favor"] = datos["Total saldo a favor"]
-        dicc_final.append(interno)
-    print(tabulate(dicc_final, headers="keys", tablefmt= "fancy_grid", stralign= "None", maxcolwidths=15))
+    dicc_final= crear_lista_con_datos(respuesta)
+    print(dicc_final)
+    print(tabulate(dicc_final, headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=15))
 
 
 def print_req_3(control):
@@ -172,8 +166,24 @@ def print_req_3(control):
         Función que imprime la solución del Requerimiento 3 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 3
+    """
+    """
     dates= controller.req_3(control)
-    print(dates)
+    dicc_final= []
+    for datos in dates:
+        interno= {}
+        interno["Año"] = datos["Año"]
+        interno["Código sector\neconómico"] = datos["Código sector económico"]
+        interno["Nombre sector\neconómic"] = datos["Nombre sector económico"]
+        interno["Código subsector\neconómico"] = datos["Código subsector económico"]
+        interno["Nombre subsector\neconómico"] = datos["Nombre subsector económico"]
+        interno["Total\nde retenciones\ndel subsector\neconómico"] = datos["Total retenciones"]
+        interno["Total\ningreso netos\ndel subsector\neconómico"] = datos["Total ingresos netos"]
+        interno["Total\ncostos y gastos\ndel subsector\neconómico"] = datos["Total costos y gastos"]
+        interno["Total\nsaldo a pagar\ndel subsector\neconómico"] = datos["Total saldo a pagar"]
+        interno["Total\nsaldo a favor\ndel subsector\neconómico"] = datos["Total saldo a favor"]
+        dicc_final.append(interno)
+    print(tabulate(dicc_final, headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=14))
 
 
 def print_req_4(control):
@@ -215,11 +225,9 @@ def print_req_8(control):
     # TODO: Imprimir el resultado del requerimiento 8
     print(controller.req_8(control))
 
-def printSortResults(sort_books, sample=3):
-    size = lt.size(sort_books)
-    lista_1 =lt.iterator(sort_books)
-    dicc_final= []
-    for datos in lista_1:
+def printSortResults(sort_books):
+    anos= lt.newList("ARRAY_LIST")
+    for datos in sort_books["elements"]:
         interno= {}
         interno["Año"] = datos["Año"]
         interno["Código actividad\neconómica"] = datos["Código actividad económica"]
@@ -232,8 +240,38 @@ def printSortResults(sort_books, sample=3):
         interno["Total\ncostos y gastos"] = datos["Total costos y gastos"]
         interno["Total\nsaldo a pagar"] = datos["Total saldo a pagar"]
         interno["Total\nsaldo a favor"] = datos["Total saldo a favor"]
-        dicc_final.append(interno)
-    losimp =[]
+        lt.addFirst(anos,interno)
+    anios= controller.organizar_anio(anos)
+    anes= anios.keys()
+    for fecha in anes:
+        dicc_final= lt.newList("ARRAY_LIST")
+        size = lt.size(anios[fecha])
+        print("Las",size,"actividades economicas del",fecha,"son:\n")
+        a= 0
+        if size>=6:
+            first= 0
+            last= size-3
+            while last<size and first<3:
+                datos= anios[fecha]["elements"][last]
+                lt.addLast(dicc_final,datos)
+                last+=1
+                datos= anios[fecha]["elements"][first]
+                lt.addLast(dicc_final,datos)
+                first+= 1
+            print(tabulate(dicc_final["elements"], headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=14))
+        else:
+            i=0
+            while i<size:
+                datos= anios[fecha]["elements"][i]
+                lt.addLast(dicc_final,datos)
+                i+=1
+            print(tabulate(dicc_final["elements"], headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=14))
+            
+
+# Se crea el controlador asociado a la vista
+control = new_controller("ARRAY_LIST")
+
+"""losimp =[]
     first= 0
     last= size-3
     while last<size:
@@ -243,11 +281,7 @@ def printSortResults(sort_books, sample=3):
     while first<sample:
         datos= dicc_final[first]
         losimp.append(datos)
-        first+= 1
-    print(tabulate(losimp, headers="keys", tablefmt= "fancy_grid", stralign= "None", maxcolwidths=15))
-
-# Se crea el controlador asociado a la vista
-control = new_controller("ARRAY_LIST")
+        first+= 1"""
 
 # main del reto
 if __name__ == "__main__":
@@ -264,7 +298,6 @@ if __name__ == "__main__":
                 print("Cargando información de los archivos ....\n")
                 data = load_data(control)
                 sort_data_result = controller.sort(control)
-                print("Las 3 ultimas y 3 primeras actividades economicas son:")
                 ordenado =printSortResults(sort_data_result[0])
                 print("El tiempo en milisegundo transcurridos fue de: ",str(sort_data_result[1]))
             
