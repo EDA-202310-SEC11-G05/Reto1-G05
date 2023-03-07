@@ -131,38 +131,6 @@ def data_size(data_structs):
 
 #Funciones de busqueda y arreglos en los requerimientos.
 
-def crear_lista_subsectores_por_anio(lista_actividades):
-    dic_subsecs ={}
-    lista = lt.iterator(lista_actividades)
-    for impuesto in lista:
-        llave_subsector_dado= impuesto['Código subsector económico']
-        if (llave_subsector_dado in dic_subsecs.keys()) == False:
-            dict_subsector_dado = {}
-            dict_subsector_dado['Año']=impuesto['Año']
-            dict_subsector_dado['Código sector económico']=impuesto['Código sector económico']
-            dict_subsector_dado['Nombre sector económico']=impuesto['Nombre sector económico']
-            dict_subsector_dado['Código subsector económico']=impuesto['Código subsector económico']
-            dict_subsector_dado['Nombre subsector económico']=impuesto['Nombre subsector económico']
-            dict_subsector_dado['Total retenciones']=float(impuesto['Total retenciones'])
-            dict_subsector_dado['Total ingresos netos']=float(impuesto['Total ingresos netos'])
-            dict_subsector_dado['Total costos y gastos']=float(impuesto['Total costos y gastos'])
-            dict_subsector_dado['Total saldo a pagar']=float(impuesto['Total saldo a pagar'])
-            dict_subsector_dado['Total saldo a favor']=float(impuesto['Total saldo a favor'])
-            dict_subsector_dado['Primeras y últimas 3 actividades en contribuir'] = 0
-            dic_subsecs[llave_subsector_dado]=dict_subsector_dado
-        else:
-            dict_subsector_dado =dic_subsecs[llave_subsector_dado]
-            dict_subsector_dado['Total retenciones']+=float(impuesto['Total retenciones'])
-            dict_subsector_dado['Total ingresos netos']+=float(impuesto['Total ingresos netos'])
-            dict_subsector_dado['Total costos y gastos']+=float(impuesto['Total costos y gastos'])
-            dict_subsector_dado['Total saldo a pagar']+=float(impuesto['Total saldo a pagar'])
-            dict_subsector_dado['Total saldo a favor']+=float(impuesto['Total saldo a favor'])      
-    subsectores=lt.newList(datastructure="ARRAY_LIST")
-    for llave in subsectores.keys():
-        print(llave)
-        lt.addLast(subsectores,dic_subsecs[llave])
-    return subsectores
-
 def agregar_lista_de_6_a_subsector(subsector, lista_de_actividades_un_anio):
     lista_de_actividades_un_anio_1 = lt.iterator(lista_de_actividades_un_anio)
     codigo_subsect = subsector['Código subsector económico']
@@ -192,47 +160,12 @@ def agregar_lista_de_6_a_subsector(subsector, lista_de_actividades_un_anio):
     return subsector
 
 
-def encontrar_menor(lista, criterio):
-    i =0
-    tamanio = lt.size(lista)
-    respuesta ={}
-    mayor= 0
-    menor = 0
-    while i <= tamanio:
-        exacto = lt.getElement(lista,i)
-        if exacto[criterio]<mayor and exacto<=menor:
-            respuesta = exacto
-            mayor = exacto[criterio]
-            menor= exacto[criterio]
-        elif (menor==0 and exacto[criterio]>=menor) and exacto[criterio]<mayor:
-            respuesta = exacto
-            mayor = exacto[criterio]
-            menor= exacto[criterio]
-        i+=1
-    return respuesta
-
-
-def crear_diccionario (data_structs, tipo, categoria, tamanio):
-    i=0
-    dic= {}
-    while i < tamanio:
-        variable = lt.getElement(data_structs[tipo],i)
-        momento = variable[categoria]
-        if variable[categoria] not in dic.keys():
-            dic[momento]= lt.newList(datastructure="ARRAY_LIST")
-            lt.addLast(dic[momento], variable )
-        elif variable[categoria] in dic.keys():
-            lt.addLast(dic[momento], variable  )
-        i+=1
-    return dic
-
-
 def organizar_anio (data_structs, categoria):
-    tamanio = data_size(data_structs)
+    tamanio = lt.size(data_structs)
     i=0
     anios= {}
     while i < tamanio:
-        variable= lt.getElement(data_structs["data"],i)
+        variable= lt.getElement(data_structs,i)
         momento= variable[categoria]
         if variable[categoria] not in anios.keys():
             anios[momento] = lt.newList(datastructure="ARRAY_LIST")
@@ -245,7 +178,6 @@ def organizar_anio (data_structs, categoria):
 
 def ayuda_req_1_y_2(data_structs,dato_a_comparar):
     anios= organizar_anio(data_structs, "Año")
-    
     mayor= lt.newList(datastructure="ARRAY_LIST")
     for fecha in anios.keys():
         i=0
@@ -299,16 +231,36 @@ def req_3(data_structs):
     """
     Función que soluciona el requerimiento 3
     """
-    lista_dicts_menores_anios = lt.newList('ARRAY_LIST')
-    tamanio_data_structs = data_size(data_structs)
-    dic_anios = crear_diccionario(data_structs, "data","Año", tamanio_data_structs)
-    for lista_actividades_un_anio_dado in dic_anios.values():
-        lista_subsects_un_anio_dado = crear_lista_subsectores_por_anio(lista_actividades_un_anio_dado)
-        menor = encontrar_menor(lista_subsects_un_anio_dado, 'Total retenciones')
-        agregar_lista_de_6_a_subsector(menor,lista_actividades_un_anio_dado)
-        lt.addLast(lista_dicts_menores_anios,menor)
-    quk.sort(lista_dicts_menores_anios,sort_criteria)
-    return lista_dicts_menores_anios
+    anios= organizar_anio(data_structs, "Año")
+    mayor= lt.newList(datastructure="ARRAY_LIST")
+    for fecha in anios.keys():
+        i=0
+        b=9999999999999999
+        tamanio= lt.size(anios[fecha])
+        while i < tamanio:
+            exacto= lt.getElement(anios[fecha],i)
+            if int(exacto["Otras retenciones"])<b:
+                alto= exacto
+                b= int(exacto["Otras retenciones"])
+            i+=1
+        lt.addLast(mayor, alto)
+    print(alto)
+    respuesta= lt.newList("ARRAY_LIST")
+    for x in range( lt.size(mayor)):
+        superior = 0
+        a = 0
+        elim = 0
+        while a < lt.size(mayor):
+            pos = lt.getElement(mayor,a)
+            if  int(pos["Año"])>superior:
+                superior = int(pos["Año"])
+                elim = a
+                dict = pos
+            a+=1
+        lt.addFirst(respuesta, dict)
+        lt.deleteElement(mayor, elim)
+    datos = lt.iterator(respuesta)
+    return datos
 
 
 def req_4(data_structs):
@@ -455,5 +407,5 @@ def sort_criteria(impuesto_1, impuesto_2):
 
 def sort(data_structs):
     sub_list = lt.subList(data_structs['data'],1,data_size(data_structs))
-    lista = quk.sort(sub_list, sort_criteria)
+    lista = merg.sort(sub_list, sort_criteria)
     return lista

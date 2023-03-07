@@ -55,6 +55,9 @@ def load_data(control, filename):
         model.add_data(data,data_estructure)
     return data
 
+def organizar_anio(data_structs):
+    return model.organizar_anio(data_structs,"Año")
+
 # Funciones de ordenamiento
 
 def sort(control):
@@ -83,7 +86,6 @@ def req_1(control):
     Retorna el resultado del requerimiento 1
     """
     # TODO: Modificar el requerimiento 1
-    
     req_1 = model.req_1(control["model"])
     return req_1
 
