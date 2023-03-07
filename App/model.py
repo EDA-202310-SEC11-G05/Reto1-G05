@@ -131,35 +131,6 @@ def data_size(data_structs):
 
 #Funciones de busqueda y arreglos en los requerimientos.
 
-def agregar_lista_de_6_a_subsector(subsector, lista_de_actividades_un_anio):
-    lista_de_actividades_un_anio_1 = lt.iterator(lista_de_actividades_un_anio)
-    codigo_subsect = subsector['Código subsector económico']
-    list_of_activity= lt.newList('ARRAY_LIST')
-    for actividad in lista_de_actividades_un_anio_1:
-        if codigo_subsect == actividad['Código subsector económico']:
-            lt.addLast(list_of_activity,actividad)
-    quk.sort(list_of_activity,sort_criteria_retenciones)
-    tamanio = lt.size(list_of_activity)
-    print(tamanio)
-    list_of_6_activities_economic= []
-    last= tamanio-3
-    first= 0
-    if tamanio>=6:
-        while first<3:
-            list_of_6_activities_economic.append(lt.getElement(list_of_activity,first))
-            first+=1
-        while last<tamanio:
-            list_of_6_activities_economic.append(lt.getElement(list_of_activity,last))
-            last+=1
-    else:
-        i=1
-        while i<=tamanio:
-            list_of_6_activities_economic.append(lt.getElement(list_of_activity,i))
-            i+=1
-    subsector['Primeras y últimas 3 actividades en contribuir']= list_of_6_activities_economic
-    return subsector
-
-
 def organizar_anio (data_structs, categoria):
     tamanio = lt.size(data_structs)
     i=0
@@ -171,7 +142,7 @@ def organizar_anio (data_structs, categoria):
             anios[momento] = lt.newList(datastructure="ARRAY_LIST")
             lt.addLast(anios[momento], variable )
         elif variable[categoria] in anios.keys():
-            lt.addLast(anios[momento], variable  )
+            lt.addLast(anios[momento], variable)
         i+=1
     return anios
 
@@ -237,30 +208,27 @@ def req_3(data_structs):
         i=0
         b=9999999999999999
         tamanio= lt.size(anios[fecha])
+        alto= lt.newList("ARRAY_LIST")
         while i < tamanio:
             exacto= lt.getElement(anios[fecha],i)
-            if int(exacto["Otras retenciones"])<b:
-                alto= exacto
-                b= int(exacto["Otras retenciones"])
+            if int(exacto["Total retenciones"])<b:
+                lt.addLast(alto,exacto)
+                b= int(exacto["Total retenciones"])
             i+=1
-        lt.addLast(mayor, alto)
-    print(alto)
-    respuesta= lt.newList("ARRAY_LIST")
-    for x in range( lt.size(mayor)):
-        superior = 0
-        a = 0
-        elim = 0
-        while a < lt.size(mayor):
-            pos = lt.getElement(mayor,a)
-            if  int(pos["Año"])>superior:
-                superior = int(pos["Año"])
-                elim = a
-                dict = pos
-            a+=1
-        lt.addFirst(respuesta, dict)
-        lt.deleteElement(mayor, elim)
-    datos = lt.iterator(respuesta)
-    return datos
+        seg_tamanio= lt.size(alto)
+        respuesta= lt.newList("ARRAY_LIST")
+        datos= lt.newList("ARRAY_LIST")
+        n= 0
+        info_inter= alto["elements"][seg_tamanio-1]
+        while n<tamanio:
+            codigo= lt.getElement(anios[fecha],n)
+            sub_codigo= lt.getElement(anios[fecha],n)
+            if int(info_inter["Código sector económico"])==int(codigo["Código sector económico"]) and int(info_inter["Código subsector económico"])==int(sub_codigo["Código subsector económico"]):
+                darko= lt.getElement(anios[fecha],i)
+                lt.addLast(datos,darko)
+            n+=1
+        lt.addLast(mayor,datos)
+    return mayor
 
 
 def req_4(data_structs):
@@ -379,10 +347,64 @@ def sort_req4(tax1, tax2):
         return tax1["Costos y gastos nómina"] > tax2["Costos y gastos nómina"]
 
 
-def sort_criteria_retenciones(parametro_1,parametro_2):
-    dato_1 = parametro_1['Total retenciones'].split()[0].split('/')[0]
-    dato_2 = parametro_2['Total retenciones'].split()[0].split('/')[0]
-    return(float(dato_1)<float(dato_2))
+def sort_criteria_of_codigo(impuesto_1,impuesto_2):
+    if impuesto_1['Código sector\neconómico']!= impuesto_2['Código sector\neconómico']:
+        cod_1 = impuesto_1['Código sector\neconómico'].split()[0].split('/')[0]
+        cod_2 = impuesto_2['Código sector\neconómico'].split()[0].split('/')[0]
+        return(float(cod_1)<float(cod_2))
+    
+
+def sort_criteria_of_codigo_req3(impuesto_1,impuesto_2):
+    if impuesto_1['Total retenciones']!= impuesto_2['Total retenciones']:
+        cod_1 = impuesto_1['Total retenciones'].split()[0]
+        cod_2 = impuesto_2['Total retenciones'].split()[0]
+        return(float(impuesto_1['Total retenciones'])< float(impuesto_2['Total retenciones']))
+
+
+def datos_organizar_para_cada_anio(anios,anes):
+    info_for_anios=lt.newList("ARRAY_LIST")
+    for fecha in anes:
+        dicc_final= lt.newList("ARRAY_LIST")
+        union= lt.newList("ARRAY_LIST")
+        print(anios)
+        anios_for= organizar_for_codigo_req3(anios[fecha])
+        size = lt.size(anios[fecha])
+        if size>=6:
+            first= 0
+            last= size-3
+            while last<size:
+                datos= anios_for["elements"][last]
+                lt.addLast(dicc_final,datos)
+                last+= 1
+            while first<3:
+                datos1= anios_for["elements"][first]
+                lt.addFirst(union,datos1)
+                first+= 1
+            if union!=0:
+                for agregar in union["elements"]:
+                    lt.addFirst(dicc_final,agregar)
+        else:
+            i=0
+            while i<size:
+                datos= anios_for["elements"][i]
+                lt.addLast(dicc_final,datos)
+                i+=1
+        lt.addLast(info_for_anios,dicc_final)
+    return info_for_anios
+
+
+def organizar_for_codigo(data_structs):
+    lista = merg.sort(data_structs, sort_criteria_of_codigo)
+    return lista
+
+
+def organizar_for_codigo_req3(data_structs):
+    tamanio= lt.size(data_structs)
+    if tamanio>1:
+        lista = merg.sort(data_structs, sort_criteria_of_codigo_req3)
+        return lista
+    else:
+        return data_structs
 
 
 def sort_criteria(impuesto_1, impuesto_2):

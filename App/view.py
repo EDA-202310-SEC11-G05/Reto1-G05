@@ -168,24 +168,71 @@ def print_req_3(control):
     # TODO: Imprimir el resultado del requerimiento 3
     """
     """
+
     dates= controller.req_3(control)
-    dicc_final= []
-    for datos in dates:
+    dac= lt.newList("ARRAY_LIST")
+    for uno in dates["elements"]:
         interno= {}
-        interno["Año"] = datos["Año"]
-        interno["Código sector\neconómico"] = datos["Código sector económico"]
-        interno["Nombre sector\neconómic"] = datos["Nombre sector económico"]
-        interno["Código subsector\neconómico"] = datos["Código subsector económico"]
-        interno["Nombre subsector\neconómico"] = datos["Nombre subsector económico"]
-        interno["Total\nde retenciones\ndel subsector\neconómico"] = datos["Total retenciones"]
-        interno["Total\ningreso netos\ndel subsector\neconómico"] = datos["Total ingresos netos"]
-        interno["Total\ncostos y gastos\ndel subsector\neconómico"] = datos["Total costos y gastos"]
-        interno["Total\nsaldo a pagar\ndel subsector\neconómico"] = datos["Total saldo a pagar"]
-        interno["Total\nsaldo a favor\ndel subsector\neconómico"] = datos["Total saldo a favor"]
-        dicc_final.append(interno)
-    print(tabulate(dicc_final, headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=14))
+        reten= 0
+        netos= 0
+        costos_y_gastos= 0
+        saldos_a_pagar= 0
+        saldo_a_favor= 0
+        for datos in uno["elements"]:
+            interno["Año"]= datos["Año"]
+            interno["Código sector\neconómico"] = datos["Código sector económico"]
+            interno["Nombre sector\neconómico"] = datos["Nombre sector económico"]
+            interno["Código subsector\neconómico"] = datos["Código subsector económico"]
+            interno["Nombre subsector\neconómico"] = datos["Nombre subsector económico"]
+            reten+= int(datos["Total retenciones"])
+            netos+= int(datos["Total ingresos netos"])
+            costos_y_gastos+= int(datos["Total costos y gastos"])
+            saldos_a_pagar+= int(datos["Total saldo a pagar"])
+            saldo_a_favor+= int(datos["Total saldo a favor"])
+        interno["Total de retenciones\ndel subsector\neconómico"]= reten
+        interno["Total ingresos\nnetos del\nsubsector económico"]= netos
+        interno["Total\ncostos y gastos\ndel subsector\neconómico"]= costos_y_gastos
+        interno["Total\nsaldo a pagar\ndel subsector\neconómico"]= saldos_a_pagar
+        interno["Total\nsaldo a favor\ndel subsector\neconómico"]= saldo_a_favor
+        lt.addLast(dac,interno)
+    dis= controller.organizar_anio(dac)
+    anios= dis.keys()
+    anios= sorted(anios)
+    for fecha in anios:
+        for dicc_final in anios[fecha]:
+            print(tabulate(dicc_final["elements"], headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=14))
+    print(anios)
+    for fecha in anios:
+        dicc_final= lt.newList("ARRAY_LIST")
+        union= lt.newList("ARRAY_LIST")
+        anios_for= controller.organizar_for_codigo(dis[fecha])
+        size = lt.size(dis[fecha])
+        if size>=6:
+            first= 0
+            last= size-3
+            print("Las 3 primeras y 3 ultimas actividades economicas del",fecha,"son:\n")
+            while last<size:
+                datos= anios_for["elements"][last]
+                lt.addLast(dicc_final,datos)
+                last+= 1
+            while first<3:
+                datos1= anios_for["elements"][first]
+                lt.addFirst(union,datos1)
+                first+= 1
+            if union!=0:
+                for agregar in union["elements"]:
+                    lt.addFirst(dicc_final,agregar)
+        else:
+            i=0
+            print("Las",size,"actividades economicas del",fecha,"son:\n")
+            while i<size:
+                datos= anios_for["elements"][i]
+                lt.addLast(dicc_final,datos)
+                i+=1
+        print(tabulate(dicc_final["elements"], headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=14))
 
-
+    
+    
 def print_req_4(control):
     """
         Función que imprime la solución del Requerimiento 4 en consola
@@ -243,30 +290,36 @@ def printSortResults(sort_books):
         lt.addFirst(anos,interno)
     anios= controller.organizar_anio(anos)
     anes= anios.keys()
+    anes= sorted(anes)
     for fecha in anes:
         dicc_final= lt.newList("ARRAY_LIST")
+        union= lt.newList("ARRAY_LIST")
+        anios_for= controller.organizar_for_codigo(anios[fecha])
         size = lt.size(anios[fecha])
-        print("Las",size,"actividades economicas del",fecha,"son:\n")
-        a= 0
         if size>=6:
             first= 0
             last= size-3
-            while last<size and first<3:
-                datos= anios[fecha]["elements"][last]
+            print("Las 3 primeras y 3 ultimas actividades economicas del",fecha,"son:\n")
+            while last<size:
+                datos= anios_for["elements"][last]
                 lt.addLast(dicc_final,datos)
-                last+=1
-                datos= anios[fecha]["elements"][first]
-                lt.addLast(dicc_final,datos)
+                last+= 1
+            while first<3:
+                datos1= anios_for["elements"][first]
+                lt.addFirst(union,datos1)
                 first+= 1
-            print(tabulate(dicc_final["elements"], headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=14))
+            if union!=0:
+                for agregar in union["elements"]:
+                    lt.addFirst(dicc_final,agregar)
         else:
             i=0
+            print("Las",size,"actividades economicas del",fecha,"son:\n")
             while i<size:
-                datos= anios[fecha]["elements"][i]
+                datos= anios_for["elements"][i]
                 lt.addLast(dicc_final,datos)
                 i+=1
-            print(tabulate(dicc_final["elements"], headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=14))
-            
+        print(tabulate(dicc_final["elements"], headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=14))
+                
 
 # Se crea el controlador asociado a la vista
 control = new_controller("ARRAY_LIST")

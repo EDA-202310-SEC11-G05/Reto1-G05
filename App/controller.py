@@ -55,8 +55,14 @@ def load_data(control, filename):
         model.add_data(data,data_estructure)
     return data
 
+def organizar_for_codigo(data_structs):
+    return model.organizar_for_codigo(data_structs)
+
 def organizar_anio(data_structs):
     return model.organizar_anio(data_structs,"Año")
+
+def datos_organizar_para_cada_anio(anios,ane):
+    return model.datos_organizar_para_cada_anio(anios,ane)
 
 # Funciones de ordenamiento
 
