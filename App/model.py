@@ -295,8 +295,22 @@ def req_4(data_structs):
         lt.addFirst(respuesta, dict)
         lt.deleteElement(mayor, elim)
     datos = lt.iterator(respuesta)
-    return datos
+
+    # Code to find three first and last items ()
+    years = {}
+
+    for element in anios:
+        if element["Año"] not in years:
+            years[element["Año"]] = []
+            years[element["Año"]].append(element)
+
+    smaller_bigger = {}
+
+    for element in years.keys():
+        smaller_bigger[element[0]["Año"]] = [years[element][:3],\
+                                             years[element[len(element)-3:len(element)]]]
     
+    return datos, smaller_bigger
 
 def req_5(data_structs):
     """
