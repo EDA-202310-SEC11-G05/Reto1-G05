@@ -177,7 +177,7 @@ def organizar_anio (data_structs, categoria):
 
 
 def ayuda_req_1_y_2(data_structs,dato_a_comparar):
-    anios= organizar_anio(data_structs, "Año")
+    anios= organizar_anio(data_structs["data"], "Año")
     mayor= lt.newList(datastructure="ARRAY_LIST")
     for fecha in anios.keys():
         i=0
@@ -231,7 +231,7 @@ def req_3(data_structs):
     """
     Función que soluciona el requerimiento 3
     """
-    anios= organizar_anio(data_structs, "Año")
+    anios= organizar_anio(data_structs["data"], "Año")
     mayor= lt.newList(datastructure="ARRAY_LIST")
     for fecha in anios.keys():
         i=0
