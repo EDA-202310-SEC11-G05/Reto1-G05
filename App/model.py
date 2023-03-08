@@ -299,16 +299,24 @@ def req_4(data_structs):
     # Code to find three first and last items ()
     years = {}
 
-    for element in anios:
-        if element["Año"] not in years:
-            years[element["Año"]] = []
-            years[element["Año"]].append(element)
+    for anio in anios.keys():
+        for element in anios[anio]["elements"]:
+            if element["Año"] not in years:
+                years[element["Año"]] = []
+                years[element["Año"]].append(element)
+            else:
+                years[element["Año"]].append(element)
+                
 
     smaller_bigger = {}
 
+
     for element in years.keys():
-        smaller_bigger[element[0]["Año"]] = [years[element][:3],\
-                                             years[element[len(element)-3:len(element)]]]
+        data = years[element]
+        if len(data)>=6:
+            smaller_bigger[data[0]["Año"]] = [data[:3], data[len(data)-3:len(data)]]
+        else:
+            smaller_bigger[data[0]["Año"]] = data
     
     return datos, smaller_bigger
 

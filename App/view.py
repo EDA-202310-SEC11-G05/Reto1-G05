@@ -190,10 +190,20 @@ def print_req_4(control):
     """
         Función que imprime la solución del Requerimiento 4 en consola
     """
-    resultados = controller.req_4(control)
+    resultados, smaller_bigger = controller.req_4(control)
     lista = helper_req4(resultados)
     
     print(tabulate(lista, headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=15))
+
+    for year in smaller_bigger:
+
+        smaller = smaller_bigger[year][0]
+        print("Economic sub-sectors with the lowest total withholdings for {anio}".format(anio=year))
+        print(tabulate(smaller, headers=smaller[0].keys(), tablefmt= "grid", stralign= "None", maxcolwidths=15))
+
+        bigger = smaller_bigger[year][1]
+        print("Economic sub-sectors with the highest total withholdings for {anio}".format(anio=year))
+        print(tabulate(bigger, headers=bigger[0].keys(), tablefmt= "grid", stralign= "None", maxcolwidths=15))
 
 def helper_req4(data):
     lista= []
