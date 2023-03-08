@@ -281,7 +281,7 @@ def print_req_4(control):
     """
         Función que imprime la solución del Requerimiento 4 en consola
     """
-    resultados, smaller_bigger,delta_time = controller.req_4(control)
+    resultados, smaller_bigger = controller.req_4(control)
     lista = helper_req4(resultados, 1)
     
     print(tabulate(lista, headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=15))
@@ -297,7 +297,6 @@ def print_req_4(control):
         print("Economic sub-sectors with the highest total withholdings for {anio}".format(anio=year))
         bigger = helper_req4(bigger, 2)
         print(tabulate(bigger, headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=15))
-    print("Tiempo:",delta_time)
 
 
 def helper_req4(data, type):
