@@ -99,10 +99,10 @@ def req_1(control):
     """
     # TODO: Modificar el requerimiento 1
     start_time =get_time()
-    req_2 = model.req_2(control["model"])
+    req_1 = model.req_1(control["model"])
     end_time = get_time()
     delta_t = delta_time(start_time,end_time)
-    return req_2, delta_t
+    return req_1, delta_t
 
 
 def req_2(control):
@@ -154,7 +154,6 @@ def req_6(control,anio):
     end_time = get_time()
     delta_t = delta_time(start_time,end_time)
     tamanio = data_size(control)
-
     return req_3, tamanio, delta_t
 
 
