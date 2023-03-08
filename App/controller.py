@@ -55,8 +55,20 @@ def load_data(control, filename):
         model.add_data(data,data_estructure)
     return data
 
+def organizar_for_codigo(data_structs):
+    return model.organizar_for_codigo(data_structs)
+
 def organizar_anio(data_structs):
     return model.organizar_anio(data_structs,"Año")
+
+def datos_organizar_para_cada_anio(anios,ane):
+    return model.datos_organizar_para_cada_anio(anios,ane)
+
+#Funciones extra
+
+def data_size(control):
+    return lt.size(control['model']["data"])
+
 
 # Funciones de ordenamiento
 
@@ -86,8 +98,11 @@ def req_1(control):
     Retorna el resultado del requerimiento 1
     """
     # TODO: Modificar el requerimiento 1
+    start_time =get_time()
     req_1 = model.req_1(control["model"])
-    return req_1
+    end_time = get_time()
+    delta_t = delta_time(start_time,end_time)
+    return req_1, delta_t
 
 
 def req_2(control):
@@ -95,8 +110,11 @@ def req_2(control):
     Retorna el resultado del requerimiento 2
     """
     # TODO: Modificar el requerimiento 2
+    start_time =get_time()
     req_2 = model.req_2(control["model"])
-    return req_2
+    end_time = get_time()
+    delta_t = delta_time(start_time,end_time)
+    return req_2, delta_t
 
 
 def req_3(control):
@@ -113,8 +131,11 @@ def req_4(control):
     Retorna el resultado del requerimiento 4
     """
     # TODO: Modificar el requerimiento 4
+    start_time =get_time()
     req_4 = model.req_4(control["model"])
-    return req_4
+    end_time = get_time()
+    delta_t = delta_time(start_time,end_time)
+    return req_4, delta_t
 
 
 def req_5(control):
@@ -126,22 +147,29 @@ def req_5(control):
     return req_5
 
 
-def req_6(control):
+def req_6(control,anio):
     """
     Retorna el resultado del requerimiento 6
     """
     # TODO: Modificar el requerimiento 6
-    req_6 = model.req_6(control["model"])
-    return req_6
+    start_time = get_time()
+    req_3 = model.req_6(control["model"],anio)
+    end_time = get_time()
+    delta_t = delta_time(start_time,end_time)
+    tamanio = data_size(control)
+    return req_3, tamanio, delta_t
 
 
-def req_7(control):
+def req_7(control, numero , anio_in, anio_fin):
     """
     Retorna el resultado del requerimiento 7
     """
     # TODO: Modificar el requerimiento 7
-    req_7 = model.req_7(control["model"])
-    return req_7
+    start_time = get_time()
+    req_7 = model.req_7(control["model"], numero, anio_in, anio_fin)
+    end_time = get_time()
+    delta_t = delta_time(start_time,end_time)
+    return req_7, delta_t
 
 
 def req_8(control):
