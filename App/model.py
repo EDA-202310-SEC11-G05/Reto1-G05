@@ -132,6 +132,7 @@ def data_size(data_structs):
 #Funciones de busqueda y arreglos en los requerimientos.
 
 def organizar_anio (data_structs, categoria):
+    # Complejidad: O(n)
     tamanio = lt.size(data_structs)
     i=0
     anios= {}
@@ -148,6 +149,7 @@ def organizar_anio (data_structs, categoria):
 
 
 def ayuda_req_1_y_2(data_structs,dato_a_comparar):
+    # Complejidad: O(nlogn)
     anios= organizar_anio(data_structs["data"], "Año")
     mayor= lt.newList(datastructure="ARRAY_LIST")
     for fecha in anios.keys():
@@ -186,6 +188,8 @@ def req_1(data_structs):
     """
     Función que soluciona el requerimiento 1
     """
+
+    # Complejidad total: O(nlogn)
     datos=  ayuda_req_1_y_2(data_structs,"Total saldo a pagar")
     return datos
 
@@ -194,6 +198,7 @@ def req_2(data_structs):
     """
     Función que soluciona el requerimiento 2
     """
+    # Complejidad total: O(nlogn)
     datos= ayuda_req_1_y_2(data_structs,"Total saldo a favor")
     return datos
 
@@ -301,6 +306,8 @@ def req_6(data_structs, anio):
     """
     Función que soluciona el requerimiento 6
     """
+
+    # Complejidad total: O(n)
     tamanio_data_struct = data_size(data_structs)
     dic_anios = crear_diccionario (data_structs, 'data' ,'Año',tamanio_data_struct)
     array_del_anio = dic_anios[anio]
@@ -436,22 +443,6 @@ def encontrar_mayor_con_condicion(lista, criterio, condicion):
         i+=1
     return respuesta
 
-def encontrar_mayor_con_condicion(lista, criterio, condicion):
-    i =0
-    tamanio = lt.size(lista)
-    mayor = 0
-    respuesta ={}
-    while i < tamanio:
-        exacto = lt.getElement(lista,i)
-
-        if exacto['Código sector económico'] ==  condicion:
-        
-             if float(exacto[criterio])>float(mayor):
-                mayor = exacto[criterio]
-                respuesta = exacto
-        i+=1
-    return respuesta
-
 def encontrar_menor_con_condicion(lista, criterio, condicion):
     i =0
     tamanio = lt.size(lista)
@@ -499,6 +490,9 @@ def encontrar_menor_pos(lista, criterio):
     return respuesta, pos
 
 def crear_diccionario (data_structs, tipo ,categoria,tamanio):
+
+    # Complejidad: O(n)
+    
     i =0
     dic = {}
     while i < tamanio:
