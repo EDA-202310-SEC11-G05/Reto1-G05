@@ -64,6 +64,12 @@ def organizar_anio(data_structs):
 def datos_organizar_para_cada_anio(anios,ane):
     return model.datos_organizar_para_cada_anio(anios,ane)
 
+#Funciones extra
+
+def data_size(control):
+    return lt.size(control['model']["data"])
+
+
 # Funciones de ordenamiento
 
 def sort(control):
@@ -132,21 +138,26 @@ def req_5(control):
     return req_5
 
 
-def req_6(control):
+def req_6(control,anio):
     """
     Retorna el resultado del requerimiento 6
     """
     # TODO: Modificar el requerimiento 6
-    req_6 = model.req_6(control["model"])
-    return req_6
+    start_time = get_time()
+    req_3 = model.req_6(control["model"],anio)
+    end_time = get_time()
+    delta_t = delta_time(start_time,end_time)
+    tamanio = data_size(control)
+
+    return req_3, tamanio, delta_t
 
 
-def req_7(control):
+def req_7(control, numero , anio_in, anio_fin):
     """
     Retorna el resultado del requerimiento 7
     """
     # TODO: Modificar el requerimiento 7
-    req_7 = model.req_7(control["model"])
+    req_7 = model.req_7(control["model"], numero, anio_in, anio_fin)
     return req_7
 
 
