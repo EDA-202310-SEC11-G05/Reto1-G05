@@ -211,79 +211,71 @@ def req_3(data_structs):
         alto= lt.newList("ARRAY_LIST")
         while i < tamanio:
             exacto= lt.getElement(anios[fecha],i)
-            lt.addLast(alto,exacto)
+            if int(exacto["Otras retenciones"])<b:
+                lt.addLast(alto,exacto)
+                b= int(exacto["Otras retenciones"])
             i+=1
-        print(alto)
-        u= 0
-        datos= lt.newList()
-        for n in alto["elements"]:
-            infe= n
-            while u<tamanio:
-                codigo= lt.getElement(anios[fecha],i)
-                if (float(infe[0]["Código actividad económica"]!=float(codigo["Código actividad económica"]))) and (float(infe[0]["Código sector económico"])==float(codigo["Código sector económico"])) and (float(infe[0]["Código subsector económico"])==float(codigo["Código subsector económico"])) and (infe[0]["Nombre sector económico"]==codigo["Nombre sector económico"]) and (infe[0]["Nombre subsector económico"]==codigo["Nombre subsector económico"]):
-                    darko= codigo
-                    lt.addLast(datos,darko)
-                    u+=1
-            lt.addLast(mayor,datos)
+        seg_tamanio= lt.size(alto)
+        datos= lt.newList("ARRAY_LIST")
+        n= 0
+        info_inter= lt.newList("ARRAY_LIST")
+        for menor in alto["elements"]:
+            b=9999999999999999999999
+            necesary= None
+            if int(menor["Otras retenciones"])<b:
+                b= menor["Otras retenciones"]
+                necesary= menor
+        lt.addFirst(info_inter,necesary)
+        infe= info_inter["elements"]
+        while n<tamanio:
+            codigo= lt.getElement(anios[fecha],n)
+            if (int(infe[0]["Código actividad económica"]!=int(codigo["Código actividad económica"]))) and (int(infe[0]["Código sector económico"])==int(codigo["Código sector económico"])) and (int(infe[0]["Código subsector económico"])==int(codigo["Código subsector económico"])):
+                darko= codigo
+                lt.addLast(datos,darko)
+            n+=1
+        lt.addLast(mayor,datos)
     return mayor
-
 
 def req_4(data_structs):
     """
     Función que soluciona el requerimiento 4
     """
-    anios= organizar_anio(data_structs["data"], "Año")
-    mayor= lt.newList(datastructure="ARRAY_LIST")
-    for fecha in anios.keys():
-        i=0
-        b=0
-        tamanio= lt.size(anios[fecha])
-        while i < tamanio:
-            exacto= lt.getElement(anios[fecha],i)
-            if int(exacto["Costos y gastos nómina"])>b:
-                alto= exacto
-                b= int(exacto["Costos y gastos nómina"])
-            i+=1
-        lt.addLast(mayor, alto)
-    respuesta= lt.newList("ARRAY_LIST")
-    for x in range( lt.size(mayor)):
-        superior = 0
-        a = 0
-        elim = 0
-        while a < lt.size(mayor):
-            pos = lt.getElement(mayor,a)
-            if  int(pos["Año"])>superior:
-                superior = int(pos["Año"])
-                elim = a
-                dict = pos
-            a+=1
-        lt.addFirst(respuesta, dict)
-        lt.deleteElement(mayor, elim)
-    datos = lt.iterator(respuesta)
 
-    # Code to find three first and last items ()
-    years = {}
-
-    for anio in anios.keys():
-        for element in anios[anio]["elements"]:
-            if element["Año"] not in years:
-                years[element["Año"]] = []
-                years[element["Año"]].append(element)
-            else:
-                years[element["Año"]].append(element)
-                
-
-    smaller_bigger = {}
-
-
-    for element in years.keys():
-        data = years[element]
-        if len(data)>=6:
-            smaller_bigger[data[0]["Año"]] = [data[:3], data[len(data)-3:len(data)]]
-        else:
-            smaller_bigger[data[0]["Año"]] = data
+    data = data_structs["model"]
     
-    return datos, smaller_bigger
+    # Ordenamiento por Año/Costos y gastos de nómina
+    quk.sort(data["data"], sort_req4)
+    
+    keys = ["Año", 
+            "Código sector económico", 
+            "Nombre sector económico", 
+            "Código subsector económico", 
+            "Nombre subsector económico", 
+            "Costos y gastos nómina", 
+            "Total ingresos netos", 
+            "Total costos y gastos", 
+            "Total saldo a pagar", 
+            "Total saldo a favor"]
+    
+    years = {}
+    
+    for item in range(0, lt.size(data["data"])):
+        if data["data"]["elements"][item]["Año"] not in years:
+            year = {key: data["data"]["elements"][item] for key in keys} 
+            years[data["data"]["elements"][item]["Año"]] = year
+    
+    return years
+   
+def req4_smaller_bigger_withholdings(data_structs)-> tuple:
+    # First three items by smaller Año/Costos y gastos de nómina
+    smaller = lt.subList(data_structs["model"]["data"], 1, 3)
+    
+    size = lt.size(data_structs["model"]["data"])
+    # First three items by smaller Año/Costos y gastos de nómina
+    bigger = lt.subList(data_structs["model"]["data"], size-3, 3) 
+
+    return smaller, bigger
+
 
 def req_5(data_structs):
     """
@@ -332,30 +324,37 @@ def req_7(data_structs, numero, anio_inicial, anio_final):
     tamanio = data_size(data_structs)
     anios = crear_diccionario(data_structs,"data", "Año", tamanio)
     orden_anios = ordenar_dic(anios)
+    
     por_anio = lt.newList()
     for fecha in orden_anios.keys():
+        
         if int(fecha) >= int(anio_inicial) and int(fecha)<= int(anio_final):
+            
             lt.addLast(por_anio, orden_anios[fecha])
-    i = 1
+    i = 0
     listas_org = lt.newList(datastructure="ARRAY_LIST")
-    while i<lt.size(por_anio)+1:
+    while i<lt.size(por_anio):
         inicial = lt.getElement(por_anio,i)
-
         merg.sort(inicial, sort_criteria_total_costos)
         lt.addLast(listas_org, inicial)
+
         i +=1
     e = 0
+    
     final = lt.newList("SINGLE_LINKED")
     while e < int(numero):
         menor_primer = lt.newList(datastructure="ARRAY_LIST")
+    
         for pos_lista in lt.iterator(listas_org):
             prim = lt.firstElement(pos_lista)
             lt.addLast(menor_primer, prim)
+        
         men = encontrar_menor_pos(menor_primer, "Total costos y gastos")
         lt.addLast(final, men[0])
         elim = lt.getElement(listas_org, men[1])
         lt.removeFirst(elim)
         e+=1
+        
     return final
 
 
@@ -663,10 +662,10 @@ def sort_criteria_total_costos(a,b):
     
 
 def sort_criteria_of_codigo_req3(impuesto_1,impuesto_2):
-    if impuesto_1['Total retenciones']!= impuesto_2['Total retenciones']:
-        cod_1 = impuesto_1['Total retenciones'].split()[0]
-        cod_2 = impuesto_2['Total retenciones'].split()[0]
-        return(float(impuesto_1['Total retenciones'])< float(impuesto_2['Total retenciones']))
+    if impuesto_1['Código actividad económica']!= impuesto_2['Código actividad económica']:
+        cod_1 = impuesto_1['Código actividad economica'].split()[0]
+        cod_2 = impuesto_2['Código actividad economica'].split()[0]
+        return(float(impuesto_1['Código actividad economica'])< float(impuesto_2['Código actividad economica']))
 
 
 def datos_organizar_para_cada_anio(anios,anes):

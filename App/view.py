@@ -199,10 +199,84 @@ def print_req_3(control):
     # TODO: Imprimir el resultado del requerimiento 3
     """
     """
+    dates,delta_time= controller.req_3(control)
+    dac= lt.newList("ARRAY_LIST")
+    for uno in dates["elements"]:
+        interno= {}
+        reten= 0
+        netos= 0
+        costos_y_gastos= 0
+        saldos_a_pagar= 0
+        saldo_a_favor= 0
+        for datos in uno["elements"]:
+            interno["Año"]= datos["Año"]
+            interno["Código sector\neconómico"] = datos["Código sector económico"]
+            interno["Nombre sector\neconómico"] = datos["Nombre sector económico"]
+            interno["Código subsector\neconómico"] = datos["Código subsector económico"]
+            interno["Nombre subsector\neconómico"] = datos["Nombre subsector económico"]
+            reten+= int(datos["Total retenciones"])
+            netos+= int(datos["Total ingresos netos"])
+            costos_y_gastos+= int(datos["Total costos y gastos"])
+            saldos_a_pagar+= int(datos["Total saldo a pagar"])
+            saldo_a_favor+= int(datos["Total saldo a favor"])
+        interno["Total de retenciones\ndel subsector\neconómico"]= str(reten)
+        interno["Total ingresos\nnetos del\nsubsector económico"]= str(netos)
+        interno["Total\ncostos y gastos\ndel subsector\neconómico"]= str(costos_y_gastos)
+        interno["Total\nsaldo a pagar\ndel subsector\neconómico"]= str(saldos_a_pagar)
+        interno["Total\nsaldo a favor\ndel subsector\neconómico"]= str(saldo_a_favor)
+        lt.addLast(dac,interno)
+    print(dates["elements"])
+    dis= controller.organizar_anio(dac)
+    anios= dis.keys()
+    anios= sorted(anios)
+    for_anios= lt.newList("ARRAY_LIST")
+    for fecha in anios:
+        for dicc_final in dis[fecha]["elements"]:
+            lt.addLast(for_anios,dicc_final)
+    print(tabulate(for_anios["elements"], headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=14))
+    danes= lt.newList("ARRAY_LIST")
+    for n in dates["elements"]:
+        for uno in n["elements"]:
+            interno= {}
+            interno["Código actividad económica"] = datos["Código actividad económica"]
+            interno["Nombre actividad\neconómica"] = datos["Nombre actividad económica"]
+            interno["Total retenciones"] = datos["Total retenciones"]
+            interno["Total ingresos\nnetos"] = datos["Total ingresos netos"]
+            interno["Total\ncostos y gastos"] = datos["Total costos y gastos"]
+            interno["Total\nsaldo a pagar"] = datos["Total saldo a pagar"]
+            interno["Total\nsaldo a favor"] = datos["Total saldo a favor"]
+            lt.addLast(danes,interno)
+    danes= controller.organizar_for_codigo_req3(danes)
+    for a in danes:
+        dicc_final= lt.newList("ARRAY_LIST")
+        union= lt.newList("ARRAY_LIST")
+        size = lt.size(danes)
+        if size>=6:
+            first= 0
+            last= size-3
+            print("Las 3 primeras y 3 ultimas actividades economicas del",fecha,"son:\n")
+            while last<size:
+                datos= danes["elements"][last]
+                lt.addLast(dicc_final,datos)
+                last+= 1
+            while first<3:
+                datos1= danes["elements"][first]
+                lt.addFirst(union,datos1)
+                first+= 1
+            if union!=0:
+                for agregar in union["elements"]:
+                    lt.addFirst(dicc_final,agregar)
+        else:
+            i=0
+            print("Las",size,"actividades economicas del",fecha,"son:\n")
+            while i<size:
+                datos= danes["elements"][i]
+                lt.addLast(dicc_final,datos)
+                i+=1
+        print(tabulate(dicc_final["elements"], headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=15))
+    print("Tiempo:",delta_time)
 
-    dates= controller.req_3(control)
-    return dates
-    
+
 def print_req_4(control):
     """
         Función que imprime la solución del Requerimiento 4 en consola
@@ -271,7 +345,7 @@ def print_req_6(control):
         Función que imprime la solución del Requerimiento 6 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 6
-    anio =input('Ingrse año a buscar  ')
+    anio =input('Ingrese el año a buscar: ')
     req_6 = controller.req_6(control,anio)
     req_6_lista = req_6[0]['elements']
     req_6_tamanio = req_6[1]

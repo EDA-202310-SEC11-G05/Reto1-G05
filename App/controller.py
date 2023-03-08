@@ -64,6 +64,9 @@ def organizar_anio(data_structs):
 def datos_organizar_para_cada_anio(anios,ane):
     return model.datos_organizar_para_cada_anio(anios,ane)
 
+def organizar_for_codigo_req3(data_structs):
+    return model.organizar_for_codigo_req3(data_structs)
+
 #Funciones extra
 
 def data_size(control):
@@ -122,8 +125,11 @@ def req_3(control):
     Retorna el resultado del requerimiento 3
     """
     # TODO: Modificar el requerimiento 3
+    start_time =get_time()
     req_3 = model.req_3(control["model"])
-    return req_3
+    end_time = get_time()
+    delta_t = delta_time(start_time,end_time)
+    return req_3, delta_t
 
 
 def req_4(control):
