@@ -232,7 +232,10 @@ def req_4(data_structs):
     """
     Función que soluciona el requerimiento 4
     """
+    # Organizar por año: O(n)
     anios= organizar_anio(data_structs["data"], "Año")
+
+    # Organizar por costos y gastos de nómina O(nlogn)
     mayor= lt.newList(datastructure="ARRAY_LIST")
     for fecha in anios.keys():
         i=0
@@ -261,9 +264,10 @@ def req_4(data_structs):
         lt.deleteElement(mayor, elim)
     datos = lt.iterator(respuesta)
 
-    # Code to find three first and last items ()
     years = {}
 
+
+    # Para hacer sublistas con los años O(n)
     for anio in anios.keys():
         for element in anios[anio]["elements"]:
             if element["Año"] not in years:
@@ -275,7 +279,7 @@ def req_4(data_structs):
 
     smaller_bigger = {}
 
-
+    # Code to find three first and last items O(n^2)
     for element in years.keys():
         data = years[element]
         if len(data)>=6:
