@@ -207,8 +207,54 @@ def print_req_4(control):
     """
         Función que imprime la solución del Requerimiento 4 en consola
     """
-    # TODO: Imprimir el resultado del requerimiento 4
-    print(controller.req_4(control))
+    resultados, smaller_bigger = controller.req_4(control)
+    lista = helper_req4(resultados, 1)
+    
+    print(tabulate(lista, headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=15))
+
+    for year in smaller_bigger:
+
+        smaller = smaller_bigger[year][0]
+        print("Economic sub-sectors with the lowest total withholdings for {anio}".format(anio=year))
+        smaller = helper_req4(smaller, 2)
+        print(tabulate(smaller, headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=15))
+
+        bigger = smaller_bigger[year][1]
+        print("Economic sub-sectors with the highest total withholdings for {anio}".format(anio=year))
+        bigger = helper_req4(bigger, 2)
+        print(tabulate(bigger, headers="keys", tablefmt= "grid", stralign= "None", maxcolwidths=15))
+
+
+def helper_req4(data, type):
+    lista= []
+
+    if type == 1:
+        for datos in data:
+            interno= {}
+            interno["Año"] = datos["Año"]
+            interno["Código sector\neconómico"] = datos["Código sector económico"]
+            interno["Nombre sector\neconómico"] = datos["Nombre sector económico"]
+            interno["Código subsector\neconómico"] = datos["Código subsector económico"]
+            interno["Nombre subsector\neconómico"] = datos["Nombre subsector económico"]
+            interno["Total costos\ny gastos nómina\ndel subsector \neconómico"] = datos["Costos y gastos nómina"]
+            interno["Total ingresos\nnetos del\nsubsector económico"] = datos["Total ingresos netos"]
+            interno["Total\ncostos y gastos\ndel subsector\neconómico"] = datos["Total costos y gastos"]
+            interno["Total\nsaldo a pagar\ndel subsector\neconómico"] = datos["Total saldo a pagar"]
+            interno["Total\nsaldo a favor\ndel subsector\neconómico"] = datos["Total saldo a favor"]
+            lista.append(interno)
+    if type == 2:
+        for datos in data:
+            interno= {}
+            interno["Año"] = datos["Año"]
+            interno["Código actividad\neconómica"] = datos["Código sector económico"]
+            interno["Nombre actividad\neconómica"] = datos["Nombre sector económico"]
+            interno["Total costos\ny gastos nómina\ndel subsector\neconómico"] = datos["Costos y gastos nómina"]
+            interno["Total ingresos\nnetos del\nsubsector económico"] = datos["Total ingresos netos"]
+            interno["Total\ncostos y gastos\ndel subsector\neconómico"] = datos["Total costos y gastos"]
+            interno["Total\nsaldo a pagar\ndel subsector\neconómico"] = datos["Total saldo a pagar"]
+            interno["Total\nsaldo a favor\ndel subsector\neconómico"] = datos["Total saldo a favor"]
+            lista.append(interno)
+    return lista
 
 
 def print_req_5(control):
