@@ -132,10 +132,10 @@ def req_4(control):
     """
     # TODO: Modificar el requerimiento 4
     start_time =get_time()
-    req_4 = model.req_4(control["model"])
+    resultados, smaller_bigger= model.req_4(control["model"])
     end_time = get_time()
     delta_t = delta_time(start_time,end_time)
-    return req_4, delta_t
+    return resultados, smaller_bigger, delta_t
 
 
 def req_5(control):
